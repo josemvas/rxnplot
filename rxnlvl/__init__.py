@@ -23,6 +23,7 @@ from edge   import edge
 from baseline import baseline
 from rxnlvl_util import validateColour, appendTextFile
 import sys, os
+from IPython.display import SVG, display
 
 class plot():
    # dimensions = [0,0]
@@ -112,7 +113,7 @@ class plot():
         return([ energyRange[0]-(bufsize/100.0)*diff,
                  energyRange[1]+(bufsize/100.0)*diff ])
 
-    def write(self):
+    def render(self):
         # Determine absolute path
         path = os.path.dirname(unicode(__file__,sys.getfilesystemencoding()))
         svgstring = ''
@@ -195,5 +196,11 @@ class plot():
                           qualify(node,self.qualified)
                          ))
         svgstring += appendTextFile('{0}/dat/svgpostfix.frag'.format(str(path)))
-        sys.stderr.write('Normal termination\n')
-        sys.stdout.write(svgstring)
+#        sys.stderr.write('Normal termination\n')
+#        sys.stdout.write(svgstring)
+        self.svgstring = svgstring
+        display(SVG(self.svgstring))
+
+    def write(self, filename):
+        with open(filename, 'w') as f:
+            f.write(self.svgstring)

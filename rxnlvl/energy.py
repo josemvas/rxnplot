@@ -29,7 +29,7 @@ unit_conversion = { 'kjmol':        1.0,
 unit_prettyprint = { 'kjmol':     'kJ·mol⁻¹',
                      'eh'   :     'Hartree',
                      'ev'   :     'eV',
-                     'kcal' :     'kCal·mol⁻¹',
+                     'kcal' :     'kcal·mol⁻¹',
                      'wavenumber':'cm⁻¹'
                    }
 
