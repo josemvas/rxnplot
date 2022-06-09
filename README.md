@@ -1,7 +1,7 @@
 rxnlvl
 ======
 
-Es un paquete sencillo de python para dibujar diagramas de niveles de enrgía de reacciones químicas atractivos.
+Es un paquete de python simple para dibujar diagramas de niveles de enrgía de reacciones químicas atractivos.
 
 ![Un diagrama de niveles de energía](http://i.imgur.com/VMpnduy.png)
 
@@ -50,11 +50,11 @@ Este "boilerplate" sólo le dice a Python dónde encontrar rxnlvl. Repasemos el 
     p = plot([25.0,10.0],vbuf=10.0,hbuf=5.0,bgcolour=None, qualified='sortof')
     
 plot toma los siguientes argumentos:
-- `dimensions` - el ancho y ato del gráfico en cm.
+- `dimensions` - el ancho y alto del gráfico en cm.
 - `vbuf` - el margen vertical como un porcentaje de la altura total.
 - `hbuf` - el margen horizontal como un porcentaje de la altura total.
-- `bgcolour` - el color de fondo de la imagen, como un entero hexadecimal de 24 bits, o `None`. `None`, el fondo será transparente.
-- `qualified` - `True`, las unidades en las que cada energía es especificada serán estilizadas en la imagen. `False`, sólo imprimirá los valores numéricos. Si se especifica *cualquier* valor de cadena, sólo imprimirá los niveles de energía de extrema izquierda, que es útil cuando quieres dar las unidades en tu gráfico pero no quieres atiborrarlo.
+- `bgcolour` - el color de fondo de la imagen, como un entero hexadecimal de 24 bits, o `None`. Si `None`, el fondo será transparente.
+- `qualified` - Si `True`, las unidades en las que cada energía es especificada serán estilizadas en la imagen. Si `False`, sólo imprimirá los valores numéricos. Si se especifica *cualquier* valor de cadena, sólo imprimirá los niveles de energía de extrema izquierda, que es útil cuando quieres dar las unidades en tu gráfico pero no quieres atiborrarlo.
 
 Ahora podemos empezar a agregar elementos al gráfico.
 
@@ -86,12 +86,11 @@ Cada arista toma los siguientes argumentos:
 Sólo puedes tener una línea de base. La sintaxis debe de ser bastante familiar:
 - `energy` - un objeto `energy` que representa la energía relativa de la línea de base. Cada energía tiene dos argumentos - la energía como un número de punto flotante, y las unidades, que pueden ser `'kjmol'`, `'eh'` (Hartrees), `'ev'` (electronvoltios), `'kcal'` (kilocalorías por mol termoquímicas) o `'wavenumber'`.
 - `colour` - un entero hexadecimal de 24 bits representando el color de la arista.
-- `mode` - elije entre `'normal'` o `'dashed'`. Controla la apariencia de la aris
-ta en términos de la discontinuidad de la línea.
+- `mode` - elije entre `'normal'` o `'dashed'`. Controla la apariencia de la arista en términos de la discontinuidad de la línea.
 - `opacity` - un flotante entre 0.0 y 1.0 representando la opacidadde la arista.
 
 ###Ok, grafiquemos esto.
 
     p.write()
 
-ará un archivo `*.svg` de tu gráfica al `stdout`. Diviértete.
+Vertirá un archivo `*.svg` de tu gráfica al `stdout`. Diviértete.
