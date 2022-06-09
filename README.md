@@ -11,7 +11,7 @@ Es un paquete de python simple para dibujar diagramas de niveles de enrgía de r
 
 ¿Cómo lo trabajo?
 ------
-Puedes importar el módulo `rxnlvl` para dibujar gráficas. Se planea un parser para aquellos no versados en Python, pero incluso si no sabes python deberías poder crear gráficas fácilmente. Aquí está el script que genera parte de la imagen que ves arriba (lo trunqué por brevedad, pero puedes hacer digramas tan largos como quieras):
+Puedes importar el módulo `rxnlvl` para dibujar gráficas. Se planea un parser para aquellos no versados en Python, pero incluso si no sabes python deberías poder crear gráficas fácilmente. Aquí está el script que genera parte de la imagen que ves arriba (lo trunqué por brevedad, pero puedes hacer diagramas tan largos como quieras):
 
     #! /usr/bin/python
     
@@ -43,18 +43,18 @@ Puedes importar el módulo `rxnlvl` para dibujar gráficas. Se planea un parser 
     p.write()
 
 
-Este "boilerplate" sólo le dice a Python dónde encontrar rxnlvl. Repasemos el resto:
+El "boilerplate" sólo le dice a Python dónde encontrar `rxnlvl`. Repasemos el resto:
 
 ###Creación del gráfico:
 
     p = plot([25.0,10.0],vbuf=10.0,hbuf=5.0,bgcolour=None, qualified='sortof')
     
-plot toma los siguientes argumentos:
+`plot` toma los siguientes argumentos:
 - `dimensions` - el ancho y alto del gráfico en cm.
 - `vbuf` - el margen vertical como un porcentaje de la altura total.
 - `hbuf` - el margen horizontal como un porcentaje de la altura total.
 - `bgcolour` - el color de fondo de la imagen, como un entero hexadecimal de 24 bits, o `None`. Si `None`, el fondo será transparente.
-- `qualified` - Si `True`, las unidades en las que cada energía es especificada serán estilizadas en la imagen. Si `False`, sólo imprimirá los valores numéricos. Si se especifica *cualquier* valor de cadena, sólo imprimirá los niveles de energía de extrema izquierda, que es útil cuando quieres dar las unidades en tu gráfico pero no quieres atiborrarlo.
+- `qualified` - Si `True`, las unidades en las que cada energía es especificada serán impresas en la imagen. Si `False`, sólo imprimirá los valores numéricos. Si se especifica *cualquier* valor de cadena, sólo imprimirá las unidades en el nivel de energía de extrema izquierda, que es útil cuando quieres dar las unidades en tu gráfica pero no quieres atiborrarla.
 
 Ahora podemos empezar a agregar elementos al gráfico.
 
@@ -62,7 +62,7 @@ Ahora podemos empezar a agregar elementos al gráfico.
 
     p +  level(energy(   0, 'kjmol'),  1,    '1',      0x0)
 
-Cada objeto nivel toma los siguientes argumentos:
+Cada objeto `level` toma los siguientes argumentos:
 - `energy` - un objeto `energy` que representa la energía relativa del nivel. Cada energía tiene dos argumentos - la energía como un número de punto flotante, y las unidades, que pueden ser `'kjmol'`, `'eh'` (Hartrees), `'ev'` (electronvoltios), `'kcal'` (kilocalorías por mol termoquímicas) o `'wavenumber'`.
 - `location` - la ubicación ordinal del nivel en el esquema. Éste debe ser un entero positivo diferente de cero. Diferentes niveles pueden compartir la misma ubicación.
 - `name` - el nombre del nivel en el esquema. Los niveles no deberían compartir el mismo nombre.
@@ -72,7 +72,7 @@ Cada objeto nivel toma los siguientes argumentos:
 
     p +  edge(    '1',  'EC1', 0x0, 0.4, 'normal')
 
-Cada arista toma los siguientes argumentos:
+Cada `edge` toma los siguientes argumentos:
 - `start` - el `name` del nivel del que se origina la arista.
 - `end` - el `name` del nivel en el que termina la arista. Éste tiene que ser diferente de `start`.
 - `colour` - un entero hexadecimal de 24 bits representando el color de la arista.
@@ -87,7 +87,7 @@ Sólo puedes tener una línea de base. La sintaxis debe de ser bastante familiar
 - `energy` - un objeto `energy` que representa la energía relativa de la línea de base. Cada energía tiene dos argumentos - la energía como un número de punto flotante, y las unidades, que pueden ser `'kjmol'`, `'eh'` (Hartrees), `'ev'` (electronvoltios), `'kcal'` (kilocalorías por mol termoquímicas) o `'wavenumber'`.
 - `colour` - un entero hexadecimal de 24 bits representando el color de la arista.
 - `mode` - elije entre `'normal'` o `'dashed'`. Controla la apariencia de la arista en términos de la discontinuidad de la línea.
-- `opacity` - un flotante entre 0.0 y 1.0 representando la opacidadde la arista.
+- `opacity` - un flotante entre 0.0 y 1.0 representando la opacidad de la arista.
 
 ###Ok, grafiquemos esto.
 
