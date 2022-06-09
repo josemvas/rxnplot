@@ -1,23 +1,23 @@
 rxnlvl
 ======
 
-A simple python package for drawing attractive chemical reaction energy level diagrams.
+Es un paquete sencillo de python para dibujar diagramas de niveles de enrgía de reacciones químicas atractivos.
 
-![An energy level diagram](http://i.imgur.com/VMpnduy.png)
+![Un diagrama de niveles de energía](http://i.imgur.com/VMpnduy.png)
 
-What do I need?
+¿Qué necesito?
 ------
-`rxnlvl` requires Python 2.x or later.
+`rxnlvl` require Python 2.x o superior.
 
-How do I work it?
+¿Cómo lo trabajo?
 ------
-You can import the `rxnlvl` module to draw plots. A parser for those not versed in Python is planned, but even if you don't know python you should still be able to easily create plots. Here's the script that generates part of the image you see above (I truncated it for brevity but you can make plots as long as you want):
+Puedes importar el módulo `rxnlvl` para dibujar gráficas. Se planea un parser para aquellos no versados en Python, pero incluso si no sabes python deberías poder crear gráficas fácilmente. Aquí está el script que genera parte de la imagen que ves arriba (lo trunqué por brevedad, pero puedes hacer digramas tan largos como quieras):
 
     #! /usr/bin/python
     
     # Boilerplate
     import sys
-    sys.path.insert(1,"/home/user/bin/rxnlvl/") # Change this to the full path of rxnlvl
+    sys.path.insert(1,"/home/user/bin/rxnlvl/") # Cambia esto por la ruta completa a rxnlvl
     from rxnlvl import *
     
     # Plot
@@ -43,54 +43,55 @@ You can import the `rxnlvl` module to draw plots. A parser for those not versed 
     p.write()
 
 
-The boilerplate just tells Python where to find rxnlvl. Let's step through the rest:
+Este "boilerplate" sólo le dice a Python dónde encontrar rxnlvl. Repasemos el resto:
 
-###Plot creation:
+###Creación del gráfico:
 
     p = plot([25.0,10.0],vbuf=10.0,hbuf=5.0,bgcolour=None, qualified='sortof')
     
-The plot takes the following arguments:
-- `dimensions` - the width and height of the plot in cm.
-- `vbuf` - the vertical margin as a percentage of the total height.
-- `hbuf` - the horizontal margin as a percentage of the total height.
-- `bgcolour` - the background colour of the image, as a 24-bit hexadecimal integer, or `None`. If `None`, the background will be transparent!
-- `qualified` - if True, the units in which each energy are specified will be pretty-printed in the image. If False, will only print the numeric values. If set to *any* string value, will only print units on the leftmost energy level, which is useful if you want to give units in your plot but don't want to clutter it up.
+plot toma los siguientes argumentos:
+- `dimensions` - el ancho y ato del gráfico en cm.
+- `vbuf` - el margen vertical como un porcentaje de la altura total.
+- `hbuf` - el margen horizontal como un porcentaje de la altura total.
+- `bgcolour` - el color de fondo de la imagen, como un entero hexadecimal de 24 bits, o `None`. `None`, el fondo será transparente.
+- `qualified` - `True`, las unidades en las que cada energía es especificada serán estilizadas en la imagen. `False`, sólo imprimirá los valores numéricos. Si se especifica *cualquier* valor de cadena, sólo imprimirá los niveles de energía de extrema izquierda, que es útil cuando quieres dar las unidades en tu gráfico pero no quieres atiborrarlo.
 
-Now we can start adding elements to the plot.
+Ahora podemos empezar a agregar elementos al gráfico.
 
-###Time to add some levels:
+###Hora de agregar algunos niveles:
 
     p +  level(energy(   0, 'kjmol'),  1,    '1',      0x0)
 
-Each level object takes the following arguments:
-- `energy` - an `energy` object which represents the relative energy of the level. Each energy has 2 arguments - the energy as a floating point number, and the units, which can be `'kjmol'`, `'eh'` (Hartrees), `'ev'` (electronvolts), `'kcal'` (thermochemical kilocalories per mole) or `'wavenumber'`.
-- `location` - the ordinal location of the level in the scheme. This must be a positive nonzero integer. Different levels can share the same location.
-- `name` - the name of the level in the scheme. Levels should not share the same name.
-- `colour` - A 24-bit hexadecimal integer representing the colour of the level.
+Cada objeto nivel toma los siguientes argumentos:
+- `energy` - un objeto `energy` que representa la energía relativa del nivel. Cada energía tiene dos argumentos - la energía como un número de punto flotante, y las unidades, que pueden ser `'kjmol'`, `'eh'` (Hartrees), `'ev'` (electronvoltios), `'kcal'` (kilocalorías por mol termoquímicas) o `'wavenumber'`.
+- `location` - la ubicación ordinal del nivel en el esquema. Éste debe ser un entero positivo diferente de cero. Diferentes niveles pueden compartir la misma ubicación.
+- `name` - el nombre del nivel en el esquema. Los niveles no deberían compartir el mismo nombre.
+- `colour` - un entero hexadecimal de 24 bits representando el color del nivel.
 
-###Time to join the levels with edges:
+###Hora de unir los niveles con aristas:
 
     p +  edge(    '1',  'EC1', 0x0, 0.4, 'normal')
 
-Each edge object takes the folliwing arguments:
-- `start` - The `name` of the level that the edge originates from.
-- `end` - The `name` of the level that the edge terminates at. This must be different to `start`.
-- `colour` - A 24-bit hexadecimal integer representing the colour of the edge.
-- `opacity` - A float between 0.0 and 1.0 representing the opacity of the edge.
-- `mode` - Choose either `'normal'` or `'dashed'`. Controls the appearance of the edge in terms of its dashed-linedness.
+Cada arista toma los siguientes argumentos:
+- `start` - el `name` del nivel del que se origina la arista.
+- `end` - el `name` del nivel en el que termina la arista. Éste tiene que ser diferente de `start`.
+- `colour` - un entero hexadecimal de 24 bits representando el color de la arista.
+- `opacity` - un flotante entre 0.0 y 1.0 representando la opacidadde la arista.
+- `mode` - elije entre `'normal'` o `'dashed'`. Controla la apariencia de la arista en términos de la discontinuidad de la línea.
 
-###Can we have a baseline ruled at 0.0 kJ/mol? Yes.
+###¿Podemos tener una linea de base graduada en 0.0 kJ/mol? Si.
 
     p + baseline(energy( 0.0, 'kjmol'),colour=0x0,mode='dashed',opacity=0.1)
 
-You can only have one baseline. The syntax should be fairly familiar:
-- `energy` - an `energy` object which represents the relative energy of the baseline. Each energy has 2 arguments - the energy as a floating point number, and the units, which can be `'kjmol'`, `'eh'` (Hartrees), `'ev'` (electronvolts), `'kcal'` (thermochemical kilocalories per mole) or `'wavenumber'`.
-- `colour` - A 24-bit hexadecimal integer representing the colour of the edge.
-- `mode` - Choose either `'normal'` or `'dashed'`. Controls the appearance of the edge in terms of its dashed-linedness.
-- `opacity` - A float between 0.0 and 1.0 representing the opacity of the edge.
+Sólo puedes tener una línea de base. La sintaxis debe de ser bastante familiar:
+- `energy` - un objeto `energy` que representa la energía relativa de la línea de base. Cada energía tiene dos argumentos - la energía como un número de punto flotante, y las unidades, que pueden ser `'kjmol'`, `'eh'` (Hartrees), `'ev'` (electronvoltios), `'kcal'` (kilocalorías por mol termoquímicas) o `'wavenumber'`.
+- `colour` - un entero hexadecimal de 24 bits representando el color de la arista.
+- `mode` - elije entre `'normal'` o `'dashed'`. Controla la apariencia de la aris
+ta en términos de la discontinuidad de la línea.
+- `opacity` - un flotante entre 0.0 y 1.0 representando la opacidadde la arista.
 
-###Okay let's plot this.
+###Ok, grafiquemos esto.
 
     p.write()
 
-Will dump a `*.svg` file of your plot to `stdout`. Have fun!
+ará un archivo `*.svg` de tu gráfica al `stdout`. Diviértete.
