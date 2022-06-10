@@ -76,7 +76,7 @@ Cada `edge` toma los siguientes argumentos:
 - `start` - el `name` del nivel del que se origina la arista.
 - `end` - el `name` del nivel en el que termina la arista. Éste tiene que ser diferente de `start`.
 - `colour` - un entero hexadecimal de 24 bits representando el color de la arista.
-- `opacity` - un flotante entre 0.0 y 1.0 representando la opacidadde la arista.
+- `opacity` - un flotante entre 0.0 y 1.0 representando la opacidad de la arista.
 - `mode` - elije entre `'normal'` o `'dashed'`. Controla la apariencia de la arista en términos de la discontinuidad de la línea.
 
 ###¿Podemos tener una linea de base graduada en 0.0 kJ/mol? Si.
