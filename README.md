@@ -1,24 +1,24 @@
-rxnlvl
+irxnlvl
 ======
 
-Es un paquete de python simple para dibujar diagramas de niveles de enrgía de reacciones químicas atractivos.
+Es un paquete interactivo de Python para dibujar atractivos diagramas de niveles de energía de reacciones químicas. Está basado en el código del paquete rxnvl, con soporte añadido para correr interactivamente en Jupyter Notebook.
 
 ![Un diagrama de niveles de energía](http://i.imgur.com/VMpnduy.png)
 
 ¿Qué necesito?
 ------
-`rxnlvl` require Python 2.x o superior.
+`irxnlvl` require Python 2.x o superior.
 
 ¿Cómo lo trabajo?
 ------
 Puedes importar el módulo `rxnlvl` para dibujar gráficas. Se planea un parser para aquellos no versados en Python, pero incluso si no sabes python deberías poder crear gráficas fácilmente. Aquí está el script que genera parte de la imagen que ves arriba (lo trunqué por brevedad, pero puedes hacer diagramas tan largos como quieras):
 
+    $pip install irxnlvl
+
     #! /usr/bin/python
     
     # Boilerplate
-    import sys
-    sys.path.insert(1,"/home/user/bin/rxnlvl/") # Cambia esto por la ruta completa a rxnlvl
-    from rxnlvl import *
+    from irxnlvl import *
     
     # Plot
     p = plot([25.0,10.0],vbuf=10.0,hbuf=5.0,bgcolour=None, qualified='sortof')
