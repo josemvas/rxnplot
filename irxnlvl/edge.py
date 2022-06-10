@@ -1,4 +1,4 @@
-#! /usr/local/bin
+#! /usr/bin/python
 # -*- coding: utf-8 -*-
 
 #    rxnlvl 0.21
@@ -17,25 +17,34 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from rxnlvl_util import validateColour
+from .rxnlvl_util import validateColour
 
-class baseline():
-    def __init__(self, energy, colour=0x0, mode='dashed', opacity=0.5):
+class edge:
+    # start   = None     # string
+    # end     = None     # string
+    # colour  = 0x0      # int, 0:2^24-1
+    # opacity = 1.0      # float, 0.0:1.0
+    # mode    = 'normal' # string
+    
+    def __init__(self, start, end, colour=0x0, opacity=1.0, mode='normal'):
         try:
-            assert energy.__class__.__name__ == 'energy',\
-            'baseline is not of class \'energy\''
+            assert start != end, 'Degenerate edge detected in input: {0} to {1}\n'.format(start, end)
         except AssertionError as e:
             sys.stderr.write(str(e))
-        self.energy=energy
-        # Ensure colour is a 24 bit hex colour.
-        if validateColour(colour):
-            self.colour = colour
-        else:
-            sys.stderr.write('{0} has invalid colour: {1}\n'.format(
-            self.describeLevel(name),
-            colour
-            ))
             sys.exit(1)
+        self.start   = start
+        self.end     = end
+        try:
+            assert type(colour) == int and int(colour) < (16**6), 'edge between {0} and {1} has invalid colour: {2}\n'.format(
+            self.start,
+            self.end,
+            colour
+            )
+        except AssertionError as e:
+            sys.stderr.write(str(e))
+            sys.exit(1)
+        self.colour  = colour
+        # Make sure edge opacity is a number between 0.0 and 1.0
         try:
             assert opacity >= 0.0 and opacity <= 1.0, 'Invalid opacity on edge {0} to {1}: {2}\n'.format(
             self.start,
@@ -47,21 +56,28 @@ class baseline():
             sys.exit(1)
         self.opacity = opacity
         self.mode    = mode
-    def getEnergy(self):
-        return(self.energy.getRawEnergy())
-    def getVisualHeight(self):
-        return(self.__visual_height)
-    def setVisualHeight(self, energyRange):
-        # Internal setter for the visual y-pos of the baseline, expressed as a percentage coordinate on the canvas
-        self.__visual_height = 100.0-(((self.getEnergy()-energyRange[0])/(energyRange[1]-energyRange[0]))*100.0)
-    def getVisualLeft(self):
-        return(0.0)
-    def getVisualRight(self):
-        return(100.0)
+
+    def __repr__(self):
+        return('<edge from {0} to {1}, colour: {2}, opacity: {3}, mode: {4}>'.format(
+        self.start,
+        self.end,
+        hex(self.colour),
+        str('{0}%'.format(self.opacity*100)),
+        self.mode))
+
+    def getStart(self):
+        return(self.start)
+
+    def getEnd(self):
+        return(self.end)
+
     def getColour(self):
         return(self.colour)
+
     def getMode(self):
         if self.mode in ['normal',  'solid',    'continuous',      '']: return('')
         if self.mode in [  'dash', 'dashed', 'discontinuous','broken']: return('stroke-dasharray="5,5"')
+
     def getOpacity(self):
         return(self.opacity)
+

@@ -17,11 +17,11 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from energy import energy
-from level  import level
-from edge   import edge
-from baseline import baseline
-from rxnlvl_util import validateColour, appendTextFile
+from .energy import energy
+from .level  import level
+from .edge   import edge
+from .baseline import baseline
+from .rxnlvl_util import validateColour, appendTextFile
 import sys, os
 from IPython.display import SVG, display
 
@@ -115,7 +115,7 @@ class plot():
 
     def render(self):
         # Determine absolute path
-        path = os.path.dirname(unicode(__file__,sys.getfilesystemencoding()))
+        path = os.path.dirname(__file__)
         svgstring = ''
         # Write the preamble for the svg format
         svgstring += appendTextFile('{}/dat/svgprefix.frag'.format(str(path)))
