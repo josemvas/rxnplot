@@ -82,7 +82,7 @@ class plot():
         self.vbuf = float(vbuf)
         self.hbuf = float(hbuf)
 
-    def __add__(self, object):
+    def __iadd__(self, object):
         choice = { 'edge':self.__add_edge, 'level':self.__add_node, 'baseline':self.__add_baseline}
         choice[object.__class__.__name__](object)
 
