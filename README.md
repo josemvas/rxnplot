@@ -5,7 +5,7 @@ irxnlvl
 
 ¿Qué necesito?
 ------
-`irxnlvl` require Python 3.x o superior.
+Necesitas clonar o descargar el repositorio en tu computadora y tener instalado Python 3.4 o superior o puedes ejecutar el programa en [Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD) sin necesidad de instalar nada.
 
 ¿Cómo lo uso?
 ------
