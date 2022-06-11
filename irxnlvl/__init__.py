@@ -83,8 +83,8 @@ class plot():
         self.hbuf = float(hbuf)
 
     def __iadd__(self, object):
-        choice = { 'edge':self.__add_edge, 'level':self.__add_node, 'baseline':self.__add_baseline}
-        choice[object.__class__.__name__](object)
+        {'edge':self.__add_edge, 'level':self.__add_node, 'baseline':self.__add_baseline}[object.__class__.__name__](object)
+        return self
 
     def __add_node(self, node):
         self.nodes.append(node)
