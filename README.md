@@ -20,7 +20,7 @@ Los pasos utilizados en los ejemplos se explican a continuación.
 
     from irxnlvl import *
 
-### Creación del gráfico
+### Crear el gráfico
 
     p = plot([25.0,10.0], vbuf=10.0, hbuf=5.0, bgcolour=None, qualified='sortof')
     
@@ -33,7 +33,7 @@ Los pasos utilizados en los ejemplos se explican a continuación.
 
 Ahora podemos empezar a agregar elementos al gráfico.
 
-### Momento de agregar algunos niveles
+### Agregar niveles de energía
 
     p +  level(energy(0, 'kjmol'),  1,  '1',  0x0)
 
@@ -43,7 +43,7 @@ Cada objeto `level` toma los siguientes argumentos:
 - `name` - el nombre del nivel en el esquema. Los niveles no deberían compartir el mismo nombre.
 - `colour` - un entero hexadecimal de 24 bits representando el color del nivel.
 
-### Momento de unir los niveles con aristas
+### Unir los niveles de energía
 
     p +  edge(    '1',  'EC1', 0x0, 0.4, 'normal')
 
@@ -54,7 +54,7 @@ Cada `edge` toma los siguientes argumentos:
 - `opacity` - un flotante entre 0.0 y 1.0 representando la opacidad de la arista.
 - `mode` - elije entre `'normal'` o `'dashed'`. Controla la apariencia de la arista en términos de la discontinuidad de la línea.
 
-### ¿Podemos tener una linea de base graduada en 0.0 kJ/mol? Si
+### Agregar una línea base
 
     p + baseline(energy( 0.0, 'kjmol'), colour=0x0, mode='dashed', opacity=0.1)
 
@@ -64,12 +64,12 @@ Sólo puedes tener una línea de base. La sintaxis debe de ser bastante familiar
 - `mode` - elije entre `'normal'` o `'dashed'`. Controla la apariencia de la arista en términos de la discontinuidad de la línea.
 - `opacity` - un flotante entre 0.0 y 1.0 representando la opacidad de la arista.
 
-### Visualicemos el resultado
+### Visualizar el diagrama
 
     p.render()
 
-### Y guardémoslo
+### Y guardarlo
 
     p.write('diagrama.svg')
 
-Creará un archivo `diagrama.svg` de tu gráfica en la misma carpeta donde se abrió el notebook.
+Creará un archivo `diagrama.svg` de tu gráfica en la misma carpeta donde se abrió el Notebook.
