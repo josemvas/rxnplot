@@ -7,13 +7,16 @@ Es un paquete interactivo de Python para dibujar atractivos diagramas de niveles
 ------
 `irxnlvl` require Python 3.x o superior.
 
-¿Cómo lo trabajo?
+¿Cómo lo uso?
 ------
-Puedes importar el módulo `rxnlvl` para dibujar gráficas. Se planea un parser para aquellos no versados en Python, pero incluso si no sabes python deberías poder crear gráficas fácilmente. Puedes ejecutar un ejemplo interactivo en [Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD?labpath=example1.ipynb).
+Puedes importar el módulo `rxnlvl` para dibujar gráficas. Se planea un parser para aquellos no versados en Python, pero incluso si no sabes python deberías poder crear gráficas fácilmente. Puedes ejecutar los ejemplos interactivamente en Binder:
 
-Los pasos realizados en el ejemplo se explican a continuación.
+[Ejemplo 1](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD?labpath=example1.ipynb).
+[Ejemplo 2](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD?labpath=example2.ipynb).
 
-###Creación del gráfico:
+Los pasos utilizados en los ejemplos se explican a continuación.
+
+### Creación del gráfico
 
     p = plot([25.0,10.0], vbuf=10.0, hbuf=5.0, bgcolour=None, qualified='sortof')
     
@@ -26,7 +29,7 @@ Los pasos realizados en el ejemplo se explican a continuación.
 
 Ahora podemos empezar a agregar elementos al gráfico.
 
-###Hora de agregar algunos niveles:
+### Momento de agregar algunos niveles
 
     p +  level(energy(0, 'kjmol'),  1,  '1',  0x0)
 
@@ -36,7 +39,7 @@ Cada objeto `level` toma los siguientes argumentos:
 - `name` - el nombre del nivel en el esquema. Los niveles no deberían compartir el mismo nombre.
 - `colour` - un entero hexadecimal de 24 bits representando el color del nivel.
 
-###Hora de unir los niveles con aristas:
+### Momento de unir los niveles con aristas
 
     p +  edge(    '1',  'EC1', 0x0, 0.4, 'normal')
 
@@ -47,7 +50,7 @@ Cada `edge` toma los siguientes argumentos:
 - `opacity` - un flotante entre 0.0 y 1.0 representando la opacidad de la arista.
 - `mode` - elije entre `'normal'` o `'dashed'`. Controla la apariencia de la arista en términos de la discontinuidad de la línea.
 
-###¿Podemos tener una linea de base graduada en 0.0 kJ/mol? Si.
+### ¿Podemos tener una linea de base graduada en 0.0 kJ/mol? Si
 
     p + baseline(energy( 0.0, 'kjmol'), colour=0x0, mode='dashed', opacity=0.1)
 
@@ -57,11 +60,11 @@ Sólo puedes tener una línea de base. La sintaxis debe de ser bastante familiar
 - `mode` - elije entre `'normal'` o `'dashed'`. Controla la apariencia de la arista en términos de la discontinuidad de la línea.
 - `opacity` - un flotante entre 0.0 y 1.0 representando la opacidad de la arista.
 
-###Visualicemos el resultado.
+### Visualicemos el resultado
 
     p.render()
 
-###Y, guardémoslo.
+### Y guardémoslo
 
     p.write('diagrama.svg')
 
