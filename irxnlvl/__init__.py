@@ -127,7 +127,7 @@ class plot():
         # Write the preamble for the svg format
         svgstring += appendTextFile('{}/dat/svgprefix.frag'.format(str(path)))
         # Write dimensions of plot
-        svgstring += ('<svg width="{0}cm" height="{1}cm" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">\n'.format(
+        svgstring += ('<svg width="{0}cm" height="{1}cm" version="1.1" xmlns="http://www.w3.org/2000/svg">\n'.format(
                       self.dimensions[0], self.dimensions[1]
                      ))
         # If background is defined, draw it
@@ -144,9 +144,7 @@ class plot():
                               node in self.nodes ]))+1)*2-1
         sliceWidth  = (100.0-self.hbuf)/slices
         # Draw vertical axis label
-        svgstring += ('    <text x="{0}%" y="{1}%" transform="rotate(-90, {0}, {1})" text-anchor="middle" font-family="sans-serif" font-size="10pt" fill="#000000">{2}</text>\n'.format(
-                          0,
-                          visualZero,
+        svgstring += ('    <text x="0" y="0" text-anchor="start" font-family="sans-serif" font-size="10pt" fill="#000000">{2}</text>\n'.format(
                           unit_prettyprint[self.units]
                          ))
         # Draw baseline if it has been defined
