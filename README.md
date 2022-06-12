@@ -37,9 +37,9 @@ Ahora podemos empezar a agregar elementos al gráfico.
 
 ### Agregar una línea base
 
-    p + baseline(energy( 0.0, 'kjmol'), colour=0x0, mode='dashed', opacity=0.1)
+    p + baseline(colour=0x0, mode='dashed', opacity=0.1)
 
-Sólo puedes tener una línea de base. La sintaxis debe de ser bastante familiar:
+Sólo puedes tener una línea de base que representa el cero de las energías relativas y toma los siguientes argumentos:
 - `colour` - un entero hexadecimal de 24 bits representando el color de la arista.
 - `mode` - elije entre `'normal'` o `'dashed'`. Controla la apariencia de la arista en términos de la discontinuidad de la línea.
 - `opacity` - un flotante entre 0.0 y 1.0 representando la opacidad de la arista.
