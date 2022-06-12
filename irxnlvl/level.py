@@ -71,14 +71,15 @@ class level:
 
     def getEnergy(self):
         # Requests raw numeric energy in kJ/mol - used for positioning and unqualified annotation
-        return(self.energy.getRawEnergy())
+        return(self.energy.energy)
 
-    def getQualifiedEnergy(self):
+    def getQualifiedEnergy(self, units, digits):
         # Gets pretty-printed energy - used for qualified annotation only
         return(str(self.energy))
+        return('{{:.{}f}} {{}}'.format(digits).format(self.energy.energy/units, unit_prettyprint[self.units]))
 
-    def getUnqualifiedEnergy(self):
-        return(str(self.energy.getUnqualifiedEnergy()))
+    def getUnqualifiedEnergy(self, units, digits):
+        return('{{:.{}f}}'.format(digits).format(self.energy.energy/units))
 
     def getLocation(self):
         # The ordinal position of the level

@@ -22,14 +22,14 @@ import sys
 unit_conversion = { 'kjmol':        1.0,
                     'eh':        2625.5,
                     'ev':          96.487,
-                    'kcal':         4.184,
+                    'kcalmol':         4.184,
                     'wavenumber':   0.011963
                   }
 
 unit_prettyprint = { 'kjmol':     'kJ·mol⁻¹',
                      'eh'   :     'Hartree',
                      'ev'   :     'eV',
-                     'kcal' :     'kcal·mol⁻¹',
+                     'kcalmol' :     'kcal·mol⁻¹',
                      'wavenumber':'cm⁻¹'
                    }
 
@@ -48,7 +48,7 @@ class energy:
         self.units = units
         self.factor_conversion = unit_conversion[self.units]
         try:
-            self.energy = float(energy)
+            self.energy = float(energy)*self.factor_conversion
         except ValueError as e:
             sys.stderr.write('Could not interpret energy: {0} {1}'.format(
             str(energy),
@@ -56,12 +56,3 @@ class energy:
             ))
             sys.exit(1)
 
-    def __repr__(self):
-        return('{0} {1}'.format(int(self.energy) if self.energy % 1 == 0 else self.energy,
-                unit_prettyprint[self.units]))
-
-    def getUnqualifiedEnergy(self):
-        return('{0}'.format(int(self.energy) if self.energy % 1 == 0 else self.energy))
-
-    def getRawEnergy(self):
-        return(self.energy*self.factor_conversion)

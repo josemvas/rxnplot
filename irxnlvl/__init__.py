@@ -32,10 +32,11 @@ class plot():
    # hbuf       = 10.0
    # nodes      = []
    # edges      = []
-   # qualified  = True
+   # units      = 'kcalmol'
+   # digits     = 1
 
     def __init__(self, dimensions, bgcolour=None, vbuf=10.0, hbuf=10.0,
-                 qualified=True):
+                 units='kcalmol', digits=1):
         self.nodes = []
         self.edges = []
         self.bgcolour = None
@@ -63,14 +64,19 @@ class plot():
                              'transparent\n'
                             )
         try:
-            assert type(qualified) in [bool, str],\
-            ('Could not interpret qualification ({0}) as '.format(qualified) +
-             'boolean or string.\n'
+            assert units in unit_conversion.keys(), 'Unrecognised unit: {0}'.format(
+            str(units)
             )
         except AssertionError as e:
+            sys.stderr.write(e)
+            sys.exit(1)
+        self.units = units
+        try:
+            assert digits >= 0, 'Digits must be a non negative integer number'
+        except AssertionError:
             sys.stderr.write(str(e))
             sys.exit(1)
-        self.qualified = qualified
+        self.digits = int(digits)
         try:
             assert vbuf > 0 and hbuf > 0,\
             ('vertical and horizontal buffers must be ' +
@@ -167,15 +173,11 @@ class plot():
                           edge.getOpacity()
                          ))
         # Draw energy levels as well as their annotations
-        def qualify(node, qualified):
-            qual_lut = {True:node.getQualifiedEnergy(), False:node.getUnqualifiedEnergy()}
-            if qualified in qual_lut.keys():
-                return(qual_lut[qualified])
+        def qualify(node):
+            if node == self.nodes[0]:
+                return(node.getQualifiedEnergy(self.units, self.digits))
             else:
-                if node == self.nodes[0]:
-                    return(node.getQualifiedEnergy())
-                else:
-                    return(node.getUnqualifiedEnergy())
+                return(node.getUnqualifiedEnergy(self.units, self.digits))
 
         for node in self.nodes:
             svgstring += ('    <line x1="{0}%" x2="{1}%" y1="{2}%" y2="{2}%" stroke-linecap="round" stroke="#{3}" stroke-width="3"/>\n'.format(
@@ -193,7 +195,7 @@ class plot():
             svgstring += ('    <text x="{0}%" y="{1}%" dy="1ex" font-family="sans-serif" text-anchor="middle" font-size="8pt" fill="#000000">{2}</text>\n'.format(
                           node.getVisualLeft()+sliceWidth/2,
                           node.getVisualHeight()+4,
-                          qualify(node,self.qualified)
+                          qualify(node)
                          ))
         svgstring += appendTextFile('{0}/dat/svgpostfix.frag'.format(str(path)))
 #        sys.stderr.write('Normal termination\n')

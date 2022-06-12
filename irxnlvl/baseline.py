@@ -48,7 +48,7 @@ class baseline():
         self.opacity = opacity
         self.mode    = mode
     def getEnergy(self):
-        return(self.energy.getRawEnergy())
+        return(self.energy.energy)
     def getVisualHeight(self):
         return(self.__visual_height)
     def setVisualHeight(self, energyRange):
