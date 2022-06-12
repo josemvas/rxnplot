@@ -152,7 +152,7 @@ class plot():
         # Draw baseline if it has been defined
         if self.baseline != None:
             svgstring += ('    <line x1="{0}%" x2="{1}%" y1="{2}%" y2="{2}%" stroke-linecap="round" stroke="#{3}" {4} stroke-opacity="{5}" stroke-width="1"/>\n'.format(
-                          0,
+                          self.hbuf/2,
                           100,
                           visualZero,
                           # Courtesy of Tim Pietzcker
