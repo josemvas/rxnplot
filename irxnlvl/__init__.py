@@ -35,12 +35,11 @@ class plot():
    # units      = 'kcalmol'
    # digits     = 1
 
-    def __init__(self, dimensions, bgcolour=None, legend=True, vbuf=10.0, hbuf=10.0,
+    def __init__(self, dimensions, bgcolour=None, vbuf=10.0, hbuf=10.0,
                  zero=energy(0, 'kjmol'),  units='kcalmol', digits=1):
         self.nodes = []
         self.edges = []
         self.bgcolour = bgcolour
-        self.legend = legend
         self.baseline = None
         self.zero = zero
         try:
@@ -144,9 +143,8 @@ class plot():
                         min([ node.getLocation() for \
                               node in self.nodes ]))+1)*2-1
         sliceWidth  = (100.0-self.hbuf)/slices
-        # Draw legend if it has been defined
-        if self.legend != None:
-            svgstring += ('    <text x="{0}ex" y="{1}%" transform="rotate(-90)" transform-origin="{0}ex {1}%" text-anchor="middle" font-family="sans-serif" font-size="10pt" fill="#000000">{1}</text>\n'.format(
+        # Draw vertical axis label
+        svgstring += ('    <text x="{0}ex" y="{1}%" transform="rotate(-90)" transform-origin="{0}ex {1}%" text-anchor="middle" font-family="sans-serif" font-size="10pt" fill="#000000">{2}</text>\n'.format(
                           1.5,
                           visualZero,
                           unit_prettyprint[self.units]
