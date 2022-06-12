@@ -35,12 +35,13 @@ class plot():
    # units      = 'kcalmol'
    # digits     = 1
 
-    def __init__(self, dimensions, bgcolour=None, vbuf=10.0, hbuf=10.0,
+    def __init__(self, dimensions, zeroref=energy(0, 'kjmol'), bgcolour=None, vbuf=10.0, hbuf=10.0,
                  units='kcalmol', digits=1):
         self.nodes = []
         self.edges = []
         self.bgcolour = None
         self.baseline = None
+        self.zeroref = zeroref
         try:
             assert len(dimensions) == 2, 'plot dimensions not equal to 2\n'
         except AssertionError as e:
@@ -144,6 +145,11 @@ class plot():
         # Draw baseline if it has been defined
         if self.baseline != None:
             self.baseline.setVisualHeight(energyRange)
+        svgstring += ('    <text x="{0}%" y="{1}%" dx="-8ex" font-family="sans-serif" text-anchor="middle" fill="#000000">{2}</text>\n'.format(
+                          self.baseline.getVisualLeft(),
+                          self.baseline.getVisualHeight(),
+                          self.baseline.getQualifiedEnergy(self.units, self.digits)
+                         ))
         svgstring += ('    <line x1="{0}%" x2="{1}%" y1="{2}%" y2="{2}%" stroke-linecap="round" stroke="#{3}" {4} stroke-opacity="{5}" stroke-width="1"/>\n'.format(
                           self.baseline.getVisualLeft(),
                           self.baseline.getVisualRight(),
@@ -173,12 +179,6 @@ class plot():
                           edge.getOpacity()
                          ))
         # Draw energy levels as well as their annotations
-        def qualify(node):
-            if node == self.nodes[0]:
-                return(node.getQualifiedEnergy(self.units, self.digits))
-            else:
-                return(node.getUnqualifiedEnergy(self.units, self.digits))
-
         for node in self.nodes:
             svgstring += ('    <line x1="{0}%" x2="{1}%" y1="{2}%" y2="{2}%" stroke-linecap="round" stroke="#{3}" stroke-width="3"/>\n'.format(
                           node.getVisualLeft(),
@@ -195,7 +195,7 @@ class plot():
             svgstring += ('    <text x="{0}%" y="{1}%" dy="1ex" font-family="sans-serif" text-anchor="middle" font-size="8pt" fill="#000000">{2}</text>\n'.format(
                           node.getVisualLeft()+sliceWidth/2,
                           node.getVisualHeight()+4,
-                          qualify(node)
+                          node.getUnqualifiedEnergy(self.zeroref.energy, self.units, self.digits)
                          ))
         svgstring += appendTextFile('{0}/dat/svgpostfix.frag'.format(str(path)))
 #        sys.stderr.write('Normal termination\n')

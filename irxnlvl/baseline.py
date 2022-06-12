@@ -18,15 +18,10 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from .rxnlvl_util import validateColour
+from .energy import energy
 
 class baseline():
-    def __init__(self, energy, colour=0x0, mode='dashed', opacity=0.5):
-        try:
-            assert energy.__class__.__name__ == 'energy',\
-            'baseline is not of class \'energy\''
-        except AssertionError as e:
-            sys.stderr.write(str(e))
-        self.energy=energy
+    def __init__(self, colour=0x0, mode='dashed', opacity=0.5):
         # Ensure colour is a 24 bit hex colour.
         if validateColour(colour):
             self.colour = colour
@@ -47,13 +42,16 @@ class baseline():
             sys.exit(1)
         self.opacity = opacity
         self.mode    = mode
-    def getEnergy(self):
-        return(self.energy.energy)
+    def getQualifiedEnergy(self, units, digits):
+        # Gets pretty-printed energy - used for qualified annotation only
+        return('{{:.{}f}} {{}}'.format(digits).format(0.0, unit_prettyprint[units]))
+    def getUnqualifiedEnergy(self, units, digits):
+        return('{{:.{}f}}'.format(digits).format(0.0))
     def getVisualHeight(self):
         return(self.__visual_height)
     def setVisualHeight(self, energyRange):
         # Internal setter for the visual y-pos of the baseline, expressed as a percentage coordinate on the canvas
-        self.__visual_height = 100.0-(((self.getEnergy()-energyRange[0])/(energyRange[1]-energyRange[0]))*100.0)
+        self.__visual_height = 100.0-(((0.0-energyRange[0])/(energyRange[1]-energyRange[0]))*100.0)
     def getVisualLeft(self):
         return(0.0)
     def getVisualRight(self):

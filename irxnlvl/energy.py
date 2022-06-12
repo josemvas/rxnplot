@@ -45,10 +45,8 @@ class energy:
         except AssertionError as e:
             sys.stderr.write(e)
             sys.exit(0)
-        self.units = units
-        self.factor_conversion = unit_conversion[self.units]
         try:
-            self.energy = float(energy)*self.factor_conversion
+            self.energy = float(energy)*unit_conversion[units]
         except ValueError as e:
             sys.stderr.write('Could not interpret energy: {0} {1}'.format(
             str(energy),
