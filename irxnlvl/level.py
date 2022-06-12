@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from .rxnlvl_util import validateColour
-from .energy import unit_conversion
+from .energy import unit_conversion, unit_prettyprint
 
 class level:
    # energy        = None # energy(float/int, string)
@@ -76,7 +76,6 @@ class level:
 
     def getQualifiedEnergy(self, units, digits):
         # Gets pretty-printed energy - used for qualified annotation only
-        return(str(self.energy))
         return('{{:.{}f}} {{}}'.format(digits).format(self.energy.energy/unit_conversion[units], unit_prettyprint[units]))
 
     def getUnqualifiedEnergy(self, units, digits):
