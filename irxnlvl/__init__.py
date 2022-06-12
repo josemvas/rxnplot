@@ -35,13 +35,13 @@ class plot():
    # units      = 'kcalmol'
    # digits     = 1
 
-    def __init__(self, dimensions, zeroref=energy(0, 'kjmol'), bgcolour=None, vbuf=10.0, hbuf=10.0,
-                 units='kcalmol', digits=1):
+    def __init__(self, dimensions, bgcolour=None, vbuf=10.0, hbuf=10.0,
+                 zero=energy(0, 'kjmol'),  units='kcalmol', digits=1):
         self.nodes = []
         self.edges = []
         self.bgcolour = None
         self.baseline = None
-        self.zeroref = zeroref
+        self.zero = zero
         try:
             assert len(dimensions) == 2, 'plot dimensions not equal to 2\n'
         except AssertionError as e:
@@ -144,7 +144,7 @@ class plot():
         sliceWidth  = (100.0-self.hbuf)/slices
         # Draw baseline if it has been defined
         if self.baseline != None:
-            self.baseline.setVisualHeight(energyRange)
+            self.baseline.setVisualHeight(energyRange, self.zero.energy)
         svgstring += ('    <text x="{0}%" y="{1}%" dx="-8ex" font-family="sans-serif" text-anchor="middle" fill="#000000">{2}</text>\n'.format(
                           self.baseline.getVisualLeft(),
                           self.baseline.getVisualHeight(),
@@ -195,7 +195,7 @@ class plot():
             svgstring += ('    <text x="{0}%" y="{1}%" dy="1ex" font-family="sans-serif" text-anchor="middle" font-size="8pt" fill="#000000">{2}</text>\n'.format(
                           node.getVisualLeft()+sliceWidth/2,
                           node.getVisualHeight()+4,
-                          node.getUnqualifiedEnergy(self.zeroref.energy, self.units, self.digits)
+                          node.getUnqualifiedEnergy(self.zero.energy, self.units, self.digits)
                          ))
         svgstring += appendTextFile('{0}/dat/svgpostfix.frag'.format(str(path)))
 #        sys.stderr.write('Normal termination\n')
