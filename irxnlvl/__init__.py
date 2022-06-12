@@ -145,7 +145,13 @@ class plot():
         # Draw baseline if it has been defined
         if self.baseline != None:
             self.baseline.setVisualHeight(energyRange, self.zero.energy)
-        svgstring += ('    <line x1="{0}%" x2="{1}%" y1="{2}%" y2="{2}%" stroke-linecap="round" stroke="#{3}" {4} stroke-opacity="{5}" stroke-width="1"/>\n'.format(
+            svgstring += ('    <text x="10%" y="10%" font-family="sans-serif" font-size="10pt" fill="#000000" transform="rotate(90)" transform-origin="10% 10%">{2}</text>\n'.format(
+                          self.baseline.getVisualLeft(),
+                          self.baseline.getVisualHeight(),
+                          unit_prettyprint[self.units]
+                         ))
+
+            svgstring += ('    <line x1="{0}%" x2="{1}%" y1="{2}%" y2="{2}%" stroke-linecap="round" stroke="#{3}" {4} stroke-opacity="{5}" stroke-width="1"/>\n'.format(
                           self.baseline.getVisualLeft(),
                           self.baseline.getVisualRight(),
                           self.baseline.getVisualHeight(),
