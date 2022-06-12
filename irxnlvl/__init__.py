@@ -17,7 +17,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from .energy import energy
+from .energy import energy, unit_conversion
 from .level  import level
 from .edge   import edge
 from .baseline import baseline
