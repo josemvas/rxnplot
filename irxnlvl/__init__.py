@@ -145,11 +145,6 @@ class plot():
         # Draw baseline if it has been defined
         if self.baseline != None:
             self.baseline.setVisualHeight(energyRange, self.zero.energy)
-        svgstring += ('    <text x="{0}%" y="{1}%" dx="-8ex" font-family="sans-serif" text-anchor="middle" fill="#000000">{2}</text>\n'.format(
-                          self.baseline.getVisualLeft(),
-                          self.baseline.getVisualHeight(),
-                          self.baseline.getQualifiedEnergy(self.units, self.digits)
-                         ))
         svgstring += ('    <line x1="{0}%" x2="{1}%" y1="{2}%" y2="{2}%" stroke-linecap="round" stroke="#{3}" {4} stroke-opacity="{5}" stroke-width="1"/>\n'.format(
                           self.baseline.getVisualLeft(),
                           self.baseline.getVisualRight(),
@@ -187,12 +182,12 @@ class plot():
                           # Courtesy of Tim Pietzcker
                           "{0:#0{1}x}".format(node.getColour(),8)[2:]
                          ))
-            svgstring += ('    <text x="{0}%" y="{1}%" dy="-1ex" font-family="sans-serif" text-anchor="middle" fill="#000000">{2}</text>\n'.format(
+            svgstring += ('    <text x="{0}%" y="{1}%" dy="-1ex" font-family="sans-serif" text-anchor="middle" font-weight="bold" fill="#000000">{2}</text>\n'.format(
                           node.getVisualLeft()+sliceWidth/2,
                           node.getVisualHeight(),
                           node.getName()
                          ))
-            svgstring += ('    <text x="{0}%" y="{1}%" dy="1ex" font-family="sans-serif" text-anchor="middle" font-size="8pt" fill="#000000">{2}</text>\n'.format(
+            svgstring += ('    <text x="{0}%" y="{1}%" dy="1ex" font-family="sans-serif" text-anchor="middle" font-size="10pt" fill="#000000">{2}</text>\n'.format(
                           node.getVisualLeft()+sliceWidth/2,
                           node.getVisualHeight()+4,
                           node.getUnqualifiedEnergy(self.zero.energy, self.units, self.digits)
