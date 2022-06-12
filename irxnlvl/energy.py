@@ -26,10 +26,10 @@ unit_conversion = { 'kjmol':        1.0,
                     'wavenumber':   0.011963
                   }
 
-unit_prettyprint = { 'kjmol':     'kJ·mol⁻¹',
+unit_prettyprint = { 'kjmol':     'kJ/mol',
                      'eh'   :     'Hartree',
                      'ev'   :     'eV',
-                     'kcalmol' :     'kcal·mol⁻¹',
+                     'kcalmol' :     'kcal/mol',
                      'wavenumber':'cm⁻¹'
                    }
 

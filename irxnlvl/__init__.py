@@ -35,13 +35,14 @@ class plot():
    # units      = 'kcalmol'
    # digits     = 1
 
-    def __init__(self, dimensions, bgcolour=None, vbuf=10.0, hbuf=10.0,
-                 zero=energy(0, 'kjmol'),  units='kcalmol', digits=1):
+    def __init__(self, dimensions, bgcolour=None, vbuf=10.0, hbuf=0.0,
+                 zero=energy(0, 'kjmol'),  units='kcalmol', digits=1, qualified=False):
         self.nodes = []
         self.edges = []
         self.bgcolour = bgcolour
         self.baseline = None
         self.zero = zero
+        self.qualified = qualified
         try:
             assert len(dimensions) == 2, 'plot dimensions not equal to 2\n'
         except AssertionError as e:
@@ -143,15 +144,11 @@ class plot():
                         min([ node.getLocation() for \
                               node in self.nodes ]))+1)*2-1
         sliceWidth  = (100.0-self.hbuf)/slices
-        # Draw vertical axis label
-        svgstring += ('    <text x="0" y="0" text-anchor="start" font-family="sans-serif" font-size="10pt" fill="#000000">{2}</text>\n'.format(
-                          unit_prettyprint[self.units]
-                         ))
         # Draw baseline if it has been defined
         if self.baseline != None:
             svgstring += ('    <line x1="{0}%" x2="{1}%" y1="{2}%" y2="{2}%" stroke-linecap="round" stroke="#{3}" {4} stroke-opacity="{5}" stroke-width="1"/>\n'.format(
                           self.hbuf/2,
-                          100,
+                          100 - self.hbuf/2,
                           visualZero,
                           # Courtesy of Tim Pietzcker
                           "{0:#0{1}x}".format(self.baseline.getColour(),8)[2:],
@@ -194,7 +191,7 @@ class plot():
             svgstring += ('    <text x="{0}%" y="{1}%" dy="1ex" font-family="sans-serif" text-anchor="middle" font-size="10pt" fill="#000000">{2}</text>\n'.format(
                           node.getVisualLeft()+sliceWidth/2,
                           node.getVisualHeight()+4,
-                          node.getUnqualifiedEnergy(self.zero.energy, self.units, self.digits)
+                          node.getQualifiedEnergy(self.zero.energy, self.units, self.digits) if self.qualified else node.getUnqualifiedEnergy(self.zero.energy, self.units, self.digits)
                          ))
         svgstring += appendTextFile('{0}/dat/svgpostfix.frag'.format(str(path)))
 #        sys.stderr.write('Normal termination\n')
