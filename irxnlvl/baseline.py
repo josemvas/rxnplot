@@ -18,7 +18,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from .rxnlvl_util import validateColour
-from .energy import unit_prettyprint
 
 class baseline():
     def __init__(self, colour=0x0, mode='dashed', opacity=0.5):
@@ -42,20 +41,6 @@ class baseline():
             sys.exit(1)
         self.opacity = opacity
         self.mode    = mode
-    def getQualifiedEnergy(self, units, digits):
-        # Gets pretty-printed energy - used for qualified annotation only
-        return('{{:.{}f}} {{}}'.format(digits).format(0.0, unit_prettyprint[units]))
-    def getUnqualifiedEnergy(self, units, digits):
-        return('{{:.{}f}}'.format(digits).format(0.0))
-    def getVisualHeight(self):
-        return(self.__visual_height)
-    def setVisualHeight(self, energyRange, zero):
-        # Internal setter for the visual y-pos of the baseline, expressed as a percentage coordinate on the canvas
-        self.__visual_height = 100.0-(((zero-energyRange[0])/(energyRange[1]-energyRange[0]))*100.0)
-    def getVisualLeft(self):
-        return(0.0)
-    def getVisualRight(self):
-        return(100.0)
     def getColour(self):
         return(self.colour)
     def getMode(self):

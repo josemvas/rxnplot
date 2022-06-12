@@ -17,7 +17,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from .energy import energy, unit_conversion
+from .energy import energy, unit_conversion, unit_prettyprint
 from .level  import level
 from .edge   import edge
 from .baseline import baseline
@@ -35,11 +35,12 @@ class plot():
    # units      = 'kcalmol'
    # digits     = 1
 
-    def __init__(self, dimensions, bgcolour=None, vbuf=10.0, hbuf=10.0,
+    def __init__(self, dimensions, bgcolour=None, legend=True, vbuf=10.0, hbuf=10.0,
                  zero=energy(0, 'kjmol'),  units='kcalmol', digits=1):
         self.nodes = []
         self.edges = []
-        self.bgcolour = None
+        self.bgcolour = bgcolour
+        self.legend = legend
         self.baseline = None
         self.zero = zero
         try:
@@ -137,24 +138,25 @@ class plot():
                          ))
         # Calculate some geometry
         energyRange = self.deriveBufferedEnergyRange(self.vbuf)
+        visualZero = 100.0-(((self.zero.energy-energyRange[0])/(energyRange[1]-energyRange[0]))*100.0)
         slices      = ((max([ node.getLocation() for \
                               node in self.nodes ]) -
                         min([ node.getLocation() for \
                               node in self.nodes ]))+1)*2-1
         sliceWidth  = (100.0-self.hbuf)/slices
-        # Draw baseline if it has been defined
-        if self.baseline != None:
-            self.baseline.setVisualHeight(energyRange, self.zero.energy)
-            svgstring += ('    <text x="10%" y="10%" font-family="sans-serif" font-size="10pt" fill="#000000" transform="rotate(90)" transform-origin="10% 10%">{2}</text>\n'.format(
-                          self.baseline.getVisualLeft(),
-                          self.baseline.getVisualHeight(),
+        # Draw legend if it has been defined
+        if self.legend != None:
+            svgstring += ('    <text x="{0}ex" y="{1}%" transform="rotate(-90)" transform-origin="{0}ex {1}%" text-anchor="middle" font-family="sans-serif" font-size="10pt" fill="#000000">{1}</text>\n'.format(
+                          1.5,
+                          visualZero,
                           unit_prettyprint[self.units]
                          ))
-
+        # Draw baseline if it has been defined
+        if self.baseline != None:
             svgstring += ('    <line x1="{0}%" x2="{1}%" y1="{2}%" y2="{2}%" stroke-linecap="round" stroke="#{3}" {4} stroke-opacity="{5}" stroke-width="1"/>\n'.format(
-                          self.baseline.getVisualLeft(),
-                          self.baseline.getVisualRight(),
-                          self.baseline.getVisualHeight(),
+                          0,
+                          100,
+                          visualZero,
                           # Courtesy of Tim Pietzcker
                           "{0:#0{1}x}".format(self.baseline.getColour(),8)[2:],
                           self.baseline.getMode(),
