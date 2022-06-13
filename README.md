@@ -1,13 +1,13 @@
 irxnlvl
 ======
 
-`irxnlvl` es una versión interactiva del paquete [rxnvl](https://github.com/eutactic/rxnlvl) para dibujar diagramas de niveles de energía de reacciones químicas. Puede ejecutarse interactivamente en un Notebook de Jupyter o como un script de Python.
+`irxnlvl` es un programa para dibujar fácilmente diagramas de niveles de energía de reacciones químicas. Es una versión modificada de [rxnvl](https://github.com/eutactic/rxnlvl) que puede ejecutarse interactivamente en Jupyter Notebook.
 
 ![diagrama 2](diagrama2.png)
 
 ¿Qué necesito?
 ------
-Necesitas clonar o descargar el `irxnlvl` y tener instalado Python 3.4 o superior o puedes probar `irxnlvl` en Binder sin necesidad de instalar nada en tu computadora:
+Necesitas clonar o descargar `irxnlvl` y tener instalado Python 3.4 o superior o puedes probar `irxnlvl` en Binder sin necesidad de instalar nada en tu computadora.
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD)
 
