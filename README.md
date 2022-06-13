@@ -15,11 +15,11 @@ Para crear diagramas requerirás escribir código de Python, pero incluso si no 
 
 Los pasos utilizados en los ejemplos se explican a continuación.
 
-### Importar el módulo
+### Importa el todo el contenido del módulo
 
     from irxnlvl import *
 
-### Crear un diagrama vacío para poder agregar elementos
+### Crea un diagrama vacío para poder agregar elementos
 
     p = plot(10.0, vbuf=10.0, hbuf=5.0, bgcolour=None, zero=energy(0.0, 'kjmol'), units='kjmol', digits=1)
     
