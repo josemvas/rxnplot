@@ -4,7 +4,7 @@ irxnlvl
 Es un paquete de Python para dibujar fácilmente diagramas de niveles de energía de reacciones químicas. Está basado en el paquete
 [rxnlvl](https://github.com/eutactic/rxnlvl) pero tiene soporte para documentos de Jupyter y opciones adicionales para ajustar las unidades de los diagramas. Para usarlo necesitas tener Python 3 e instalar `irxnlvl` o puedes [probar irxnvl en Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD) sin necesidad de instalar nada en tu computadora.
 
-![diagrama 2](diagram.png)
+![diagrama 2](diagram2.png)
 
 Instalación local
 ------
