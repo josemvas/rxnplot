@@ -39,7 +39,7 @@ Los pasos utilizados en los ejemplos se explican a continuación.
 - `zero` - un objeto `energy` que representa el cero de las energías relativas. El objeto `energy` tiene dos argumentos: la energía como un número de punto flotante y las unidades, que pueden ser `'kjmol'`, `'eh'` (Hartrees), `'ev'` (electronvoltios), `'kcalmol'` (kilocalorías por mol termoquímicas) o `'wavenumber'`.
 - `units` - Las unidades de energía del diagrama, que pueden ser `'kjmol'`, `'eh'` (Hartrees), `'ev'` (electronvoltios), `'kcalmol'` (kilocalorías por mol termoquímicas) o `'wavenumber'`.
 - `digits` - Los dígitos después del punto decimal que se usarán para mostrar las energías del diagrama.
-- `qualified` - Si es `True`, las unidades en las que cada energía es especificada serán impresas en la imagen. Si es `False`, sólo imprimirá los valores numéricos. Si se especifica *cualquier* valor de cadena, sólo imprimirá las unidades en el nivel de energía de extrema izquierda, que es útil cuando quieres dar las unidades en tu gráfica pero no quieres atiborrarla.
+- `qualified` - Si es `True`, las unidades en las que cada energía es especificada serán impresas en la imagen. Si es `False`, sólo imprimirá los valores numéricos.
 
 
 Ahora podemos empezar a agregar elementos al gráfico.
