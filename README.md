@@ -7,7 +7,7 @@ irxnlvl
 
 ¿Qué necesito?
 ------
-Necesitas clonar o descargar el `irxnlvl` en tu computadora y tener instalado Python 3.4 o superior o puedes ejecutar `irxnlvl` en Binder sin necesidad de instalar nada haciendo click en el siguiente enlace:
+Necesitas clonar o descargar el `irxnlvl` y tener instalado Python 3.4 o superior o puedes probar `irxnlvl` en Binder sin necesidad de instalar nada en tu computadora:
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD)
 
