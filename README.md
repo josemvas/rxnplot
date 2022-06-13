@@ -5,9 +5,10 @@ irxnlvl
 
 ![diagrama 2](diagrama2.png)
 
-Primeros pasos
+Crea tu primer diagrama
 ------
-Para crear un diagrama requerirás escribir código Python, pero incluso si no sabes Python puedes aprender rápidamente explorando los siguientes ejemplos interactivos:
+
+Para crear diagramas requerirás escribir código de Python, pero incluso si no sabes Python puedes aprender rápidamente explorando los siguientes ejemplos en Binder:
 
 - [Ejemplo 1](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD?labpath=example1.ipynb)
 - [Ejemplo 2](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD?labpath=example2.ipynb)
