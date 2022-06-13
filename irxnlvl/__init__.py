@@ -69,12 +69,12 @@ class plot():
             sys.stderr.write(str(e))
             sys.exit(1)
         self.digits = int(digits)
-        self.topbuf = 4.0
+        self.topbuf = 10.0
         if self.qualified:
-            self.bottombuf = 7.0
+            self.bottombuf = 12.0
         else:
-            self.bottombuf = 4.0
-        self.hbuf = 2.0
+            self.bottombuf = 8.0
+        self.hbuf = 4.0
 
     def __iadd__(self, object):
         {'edge':self.__add_edge, 'level':self.__add_node, 'baseline':self.__add_baseline}[object.__class__.__name__](object)
