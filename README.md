@@ -22,16 +22,16 @@ Los pasos utilizados en los ejemplos se explican a continuación.
 
 ### Crear un diagrama vacío para poder agregar elementos
 
-    p = plot([25.0,10.0], vbuf=10.0, hbuf=5.0, bgcolour=None, zero=energy(0.0, 'kjmol'), units='kjmol', digits=1)
+    p = plot(10.0, vbuf=10.0, hbuf=5.0, bgcolour=None, zero=energy(0.0, 'kjmol'), units='kjmol', digits=1)
     
 `plot` toma los siguientes argumentos:
-- `dimensions` - el ancho y alto del gráfico en cm.
-- `vbuf` - el margen vertical como un porcentaje de la altura total.
-- `hbuf` - el margen horizontal como un porcentaje de la altura total.
+- `height` - El alto del gráfico en cm.
 - `bgcolour` - el color de fondo de la imagen, como un entero hexadecimal de 24 bits, o `None`. Si `None`, el fondo será transparente.
 - `zero` - un objeto `energy` que representa la energía de referncia que será el cero de las energías relativas. La energía tiene dos argumentos - la energía como un número de punto flotante, y las unidades, que pueden ser `'kjmol'`, `'eh'` (Hartrees), `'ev'` (electronvoltios), `'kcalmol'` (kilocalorías por mol termoquímicas) o `'wavenumber'`.
 - `units` - Las unidades de energía del diagrama, que pueden ser `'kjmol'`, `'eh'` (Hartrees), `'ev'` (electronvoltios), `'kcalmol'` (kilocalorías por mol termoquímicas) o `'wavenumber'`.
 - `digits` - Los dígitos después del punto decimal que se usarán para mostrar las energías del diagrama.
+- `qualified` - Si es `True`, las unidades en las que cada energía es especificada serán impresas en la imagen. Si es `False`, sólo imprimirá los valores numéricos. Si se especifica *cualquier* valor de cadena, sólo imprimirá las unidades en el nivel de energía de extrema izquierda, que es útil cuando quieres dar las unidades en tu gráfica pero no quieres atiborrarla.
+
 
 Ahora podemos empezar a agregar elementos al gráfico.
 
