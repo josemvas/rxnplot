@@ -1,13 +1,15 @@
 irxnlvl
 ======
 
-`irxnlvl` es una versión interactiva del programa rxnvl para dibujar diagramas de niveles de energía de reacciones químicas. Puede ejecutarse interactivamente en un Notebook de Jupyter o como un script de Python.
+`irxnlvl` es una versión interactiva del paquete [rxnvl](https://github.com/eutactic/rxnlvl) para dibujar diagramas de niveles de energía de reacciones químicas. Puede ejecutarse interactivamente en un Notebook de Jupyter o como un script de Python.
 
 ![diagrama 2](diagrama2.png)
 
 ¿Qué necesito?
 ------
-Necesitas clonar o descargar el repositorio en tu computadora y tener instalado Python 3.4 o superior o puedes ejecutar el programa en [Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD) sin necesidad de instalar nada.
+Necesitas clonar o descargar el `irxnlvl` en tu computadora y tener instalado Python 3.4 o superior o puedes ejecutar `irxnlvl` en Binder sin necesidad de instalar nada haciendo click en el siguiente enlace:
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD)
 
 ¿Cómo lo uso?
 ------
@@ -27,7 +29,7 @@ Los pasos utilizados en los ejemplos se explican a continuación.
     p = plot(10.0, vbuf=10.0, hbuf=5.0, bgcolour=None, zero=energy(0.0, 'kjmol'), units='kjmol', digits=1)
     
 `plot` toma los siguientes argumentos:
-- `height` - El alto del gráfico en cm.
+- `size` - El tamaño vertical del gráfico en cm.
 - `bgcolour` - el color de fondo de la imagen, como un entero hexadecimal de 24 bits, o `None`. Si `None`, el fondo será transparente.
 - `zero` - un objeto `energy` que representa la energía de referncia que será el cero de las energías relativas. La energía tiene dos argumentos - la energía como un número de punto flotante, y las unidades, que pueden ser `'kjmol'`, `'eh'` (Hartrees), `'ev'` (electronvoltios), `'kcalmol'` (kilocalorías por mol termoquímicas) o `'wavenumber'`.
 - `units` - Las unidades de energía del diagrama, que pueden ser `'kjmol'`, `'eh'` (Hartrees), `'ev'` (electronvoltios), `'kcalmol'` (kilocalorías por mol termoquímicas) o `'wavenumber'`.
