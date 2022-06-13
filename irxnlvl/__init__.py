@@ -35,8 +35,7 @@ class plot():
    # units      = 'kcalmol'
    # digits     = 1
 
-    def __init__(self, height, bgcolour=None, vbuf=10.0, hbuf=0.0,
-                 zero=energy(0, 'kjmol'),  units='kcalmol', digits=1, qualified=False):
+    def __init__(self, height, bgcolour=None, zero=energy(0, 'kjmol'),  units='kcalmol', digits=1, qualified=False):
         self.nodes = []
         self.edges = []
         self.bgcolour = bgcolour
@@ -70,16 +69,12 @@ class plot():
             sys.stderr.write(str(e))
             sys.exit(1)
         self.digits = int(digits)
-        try:
-            assert vbuf > 0 and hbuf > 0,\
-            ('vertical and horizontal buffers must be ' +
-             'positive rational numbers\n'
-            )
-        except AssertionError:
-            sys.stderr.write(str(e))
-            sys.exit(1)
-        self.vbuf = float(vbuf)
-        self.hbuf = float(hbuf)
+        self.topbuf = 4.0
+        if self.qualified:
+            self.bottombuf = 7.0
+        else:
+            self.bottombuf = 4.0
+        self.hbuf = 2.0
 
     def __iadd__(self, object):
         {'edge':self.__add_edge, 'level':self.__add_node, 'baseline':self.__add_baseline}[object.__class__.__name__](object)
@@ -103,14 +98,14 @@ class plot():
                         ))
         sys.exit()
 
-    def deriveBufferedEnergyRange(self, bufsize):
+    def deriveBufferedEnergyRange(self, topbufsize, bottombufsize):
         energyRange = [
                        min([ node.getEnergy() for node in self.nodes ]),
                        max([ node.getEnergy() for node in self.nodes ])
                       ]
         diff = energyRange[1]-energyRange[0]
-        return([ energyRange[0]-(bufsize/100.0)*diff,
-                 energyRange[1]+(bufsize/100.0)*diff ])
+        return([ energyRange[0]-(bottombufsize/100.0)*diff,
+                 energyRange[1]+(topbufsize/100.0)*diff ])
 
     def render(self):
         # Determine absolute path
@@ -124,7 +119,7 @@ class plot():
                              node in self.nodes ]))+1
         # Write dimensions of plot
         svgstring += ('<svg width="{0}cm" height="{1}cm" version="1.1" xmlns="http://www.w3.org/2000/svg">\n'.format(
-                      self.height, 0.5*self.height*steps
+                      0.25*self.height*steps, self.height
                      ))
         # If background is defined, draw it
         if self.bgcolour != None:
@@ -132,7 +127,7 @@ class plot():
                           str(hex(self.bgcolour))[2:]
                          ))
         # Calculate some geometry
-        energyRange = self.deriveBufferedEnergyRange(self.vbuf)
+        energyRange = self.deriveBufferedEnergyRange(self.topbuf, self.bottombuf)
         visualZero = 100.0-(((self.zero.energy-energyRange[0])/(energyRange[1]-energyRange[0]))*100.0)
         slices      = ((max([ node.getLocation() for \
                               node in self.nodes ]) -
@@ -183,11 +178,18 @@ class plot():
                           node.getVisualHeight(),
                           node.getName()
                          ))
-            svgstring += ('    <text x="{0}%" y="{1}%" dy="1ex" font-family="sans-serif" text-anchor="middle" font-size="10pt" fill="#000000">{2}</text>\n'.format(
+            svgstring += ('    <text x="{0}%" y="{1}%" dy="2.7ex" font-family="sans-serif" text-anchor="middle" font-size="10pt" fill="#000000">{2}</text>\n'.format(
                           node.getVisualLeft()+sliceWidth/2,
-                          node.getVisualHeight()+4,
-                          node.getQualifiedEnergy(self.zero.energy, self.units, self.digits) if self.qualified else node.getUnqualifiedEnergy(self.zero.energy, self.units, self.digits)
+                          node.getVisualHeight(),
+                          node.getUnqualifiedEnergy(self.zero.energy, self.units, self.digits)
                          ))
+            if self.qualified:
+                svgstring += ('    <text x="{0}%" y="{1}%" dy="5.4ex" font-family="sans-serif" text-anchor="middle" font-size="8pt" fill="#000000">{2}</text>\n'.format(
+                          node.getVisualLeft()+sliceWidth/2,
+                          node.getVisualHeight(),
+                          unit_prettyprint[self.units]
+                         ))
+
         svgstring += appendTextFile('{0}/dat/svgpostfix.frag'.format(str(path)))
 #        sys.stderr.write('Normal termination\n')
 #        sys.stdout.write(svgstring)
