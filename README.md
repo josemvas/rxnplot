@@ -1,13 +1,13 @@
 irxnlvl
 ======
 
-`irxnlvl` es un programa para dibujar fácilmente diagramas de niveles de energía de reacciones químicas, es una versión simplificada de [rxnvl](https://github.com/eutactic/rxnlvl) que puede correr interactivamente en notebooks de Jupyter. Para usarlo necesitas clonar o descargar `irxnlvl` y tener instalado Python 3.4 o superior o puedes [probar rxnvl en Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD) sin necesidad de instalar nada en tu computadora.
+`irxnlvl` es un programa para dibujar fácilmente diagramas de niveles de energía de reacciones químicas, es una versión simplificada de [rxnvl](https://github.com/eutactic/rxnlvl) que corre interactivamente en notebooks de Jupyter. Para usarlo necesitas clonar o descargar `irxnlvl` y tener instalado Python 3.4 o superior o puedes [probar rxnvl en Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD) sin necesidad de instalar nada en tu computadora.
 
 ![diagrama 2](diagrama2.png)
 
 Primeros pasos
 ------
-Para crear un diagrama requerirás escribir código Python, pero incluso si no sabes Python puedes aprender fácilmente practicando con los siguientes ejemplos interactivos:
+Para crear un diagrama requerirás escribir código Python, pero incluso si no sabes Python puedes aprender rápidamente explorando los siguientes ejemplos interactivos:
 
 - [Ejemplo 1](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD?labpath=example1.ipynb)
 - [Ejemplo 2](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD?labpath=example2.ipynb)
@@ -67,7 +67,7 @@ Cada `edge` toma los siguientes argumentos:
 
     p.render()
 
-### Y guardarlo
+### Y si es correcto guardarlo
 
     p.write('diagrama.svg')
 
