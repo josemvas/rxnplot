@@ -26,7 +26,7 @@ Los pasos utilizados en los ejemplos se explican a continuación.
 `plot` toma los siguientes argumentos:
 - `size` - El tamaño vertical del gráfico en cm.
 - `bgcolour` - el color de fondo de la imagen, como un entero hexadecimal de 24 bits, o `None`. Si `None`, el fondo será transparente.
-- `zero` - un objeto `energy` que representa el cero de las energías relativas. El objeto `energy` tiene dos argumentos - la energía como un número de punto flotante y las unidades, que pueden ser `'kjmol'`, `'eh'` (Hartrees), `'ev'` (electronvoltios), `'kcalmol'` (kilocalorías por mol termoquímicas) o `'wavenumber'`.
+- `zero` - un objeto `energy` que representa el cero de las energías relativas. El objeto `energy` tiene dos argumentos: la energía como un número de punto flotante y las unidades, que pueden ser `'kjmol'`, `'eh'` (Hartrees), `'ev'` (electronvoltios), `'kcalmol'` (kilocalorías por mol termoquímicas) o `'wavenumber'`.
 - `units` - Las unidades de energía del diagrama, que pueden ser `'kjmol'`, `'eh'` (Hartrees), `'ev'` (electronvoltios), `'kcalmol'` (kilocalorías por mol termoquímicas) o `'wavenumber'`.
 - `digits` - Los dígitos después del punto decimal que se usarán para mostrar las energías del diagrama.
 - `qualified` - Si es `True`, las unidades en las que cada energía es especificada serán impresas en la imagen. Si es `False`, sólo imprimirá los valores numéricos. Si se especifica *cualquier* valor de cadena, sólo imprimirá las unidades en el nivel de energía de extrema izquierda, que es útil cuando quieres dar las unidades en tu gráfica pero no quieres atiborrarla.
@@ -48,7 +48,7 @@ Sólo puedes tener una línea de base que representa el cero de las energías re
     p +  level(energy(0, 'kjmol'),  1,  '1',  0x0)
 
 Cada objeto `level` toma los siguientes argumentos:
-- `energy` - un objeto `energy` que representa la energía relativa del nivel. El objeto `energy` tiene dos argumentos - la energía como un número de punto flotante, y las unidades, que pueden ser `'kjmol'`, `'eh'` (Hartrees), `'ev'` (electronvoltios), `'kcalmol'` (kilocalorías por mol termoquímicas) o `'wavenumber'`.
+- `energy` - un objeto que representa la energía relativa del nivel. El objeto `energy` tiene dos argumentos: la energía como un número de punto flotante y las unidades, que pueden ser `'kjmol'`, `'eh'` (Hartrees), `'ev'` (electronvoltios), `'kcalmol'` (kilocalorías por mol termoquímicas) o `'wavenumber'`.
 - `location` - la ubicación ordinal del nivel en el esquema. Éste debe ser un entero positivo diferente de cero. Diferentes niveles pueden compartir la misma ubicación.
 - `name` - el nombre del nivel en el esquema. Los niveles no deberían compartir el mismo nombre.
 - `colour` - un entero hexadecimal de 24 bits representando el color del nivel.
