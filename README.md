@@ -13,15 +13,15 @@ Para usar `irxnlvl` en scripts de Python solo necesitas instalar el paquete:
 
     pip install irxnlvl
     
-Para usarlo en documentos de Jupyter también debes tener instalado [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/getting_started/installation.html).
+Para usarlo en documentos de Jupyter también debes tener instalado [Jupyter Lab o Jupyter Notebook](https://jupyter.org/install).
 
 Crea tu primer diagrama
 ------
 
 Para crear diagramas requerirás escribir código de Python, pero incluso si no sabes Python puedes aprender rápidamente explorando los siguientes ejemplos:
 
-- [Abrir ejemplo 1 en Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD?labpath=example1.ipynb)
-- [Abrir ejemplo 2 en Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD?labpath=example2.ipynb)
+- [Abrir el ejemplo 1 en Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD?labpath=example1.ipynb)
+- [Abrir el ejemplo 2 en Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD?labpath=example2.ipynb)
 
 Los pasos utilizados en los ejemplos se explican a continuación.
 
