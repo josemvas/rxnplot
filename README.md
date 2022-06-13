@@ -1,7 +1,7 @@
 irxnlvl
 ======
 
-`irxnlvl` es un programa para dibujar fácilmente diagramas de niveles de energía de reacciones químicas, es una versión simplificada de [rxnvl](https://github.com/eutactic/rxnlvl) que corre interactivamente en notebooks de Jupyter. Para usarlo necesitas clonar o descargar `irxnlvl` y tener instalado Python 3.4 o superior o puedes [probar rxnvl en Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD) sin necesidad de instalar nada en tu computadora.
+`irxnlvl` es un programa para dibujar fácilmente diagramas de niveles de energía de reacciones químicas, es una versión simplificada de [rxnvl](https://github.com/eutactic/rxnlvl) que corre interactivamente en notebooks de Jupyter. Para usarlo necesitas clonar o descargar `irxnlvl` y tener instalado Python 3.4 o superior o puedes [probar irxnvl en Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD) sin necesidad de instalar nada en tu computadora.
 
 ![diagrama 2](diagrama2.png)
 
