@@ -26,7 +26,7 @@ import sys, os
 from IPython.display import SVG, display
 
 class plot():
-   # dimensions = [0,0]
+   # height = 10
    # bgcolour   = None
    # vbuf       = 10.0
    # hbuf       = 10.0
@@ -35,7 +35,7 @@ class plot():
    # units      = 'kcalmol'
    # digits     = 1
 
-    def __init__(self, dimensions, bgcolour=None, vbuf=10.0, hbuf=0.0,
+    def __init__(self, height, bgcolour=None, vbuf=10.0, hbuf=0.0,
                  zero=energy(0, 'kjmol'),  units='kcalmol', digits=1, qualified=False):
         self.nodes = []
         self.edges = []
@@ -44,20 +44,11 @@ class plot():
         self.zero = zero
         self.qualified = qualified
         try:
-            assert len(dimensions) == 2, 'plot dimensions not equal to 2\n'
+            assert height > 0, 'height must be positive\n'
         except AssertionError as e:
             sys.stderr.write(str(e))
             sys.exit(1)
-        try:
-            for elem in dimensions:
-                assert type(elem) in [int,float] and elem > 1,\
-                'Malformed dimension element: {0}\n'.format(
-                str(elem)
-                )
-        except AssertionError as e:
-            sys.stderr.write(str(e))
-            sys.exit(1)
-        self.dimensions = dimensions
+        self.height = height
         if validateColour(bgcolour):
             self.bgcolour = bgcolour
         else:
@@ -127,9 +118,13 @@ class plot():
         svgstring = ''
         # Write the preamble for the svg format
         svgstring += appendTextFile('{}/dat/svgprefix.frag'.format(str(path)))
+        steps       = (max([ node.getLocation() for \
+                             node in self.nodes ]) -
+                       min([ node.getLocation() for \
+                             node in self.nodes ]))+1
         # Write dimensions of plot
         svgstring += ('<svg width="{0}cm" height="{1}cm" version="1.1" xmlns="http://www.w3.org/2000/svg">\n'.format(
-                      self.dimensions[0], self.dimensions[1]
+                      self.height, 0.5*self.height*steps
                      ))
         # If background is defined, draw it
         if self.bgcolour != None:
