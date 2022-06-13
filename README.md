@@ -9,7 +9,11 @@ Es un paquete de Python para dibujar fácilmente diagramas de niveles de energí
 Instalación local
 ------
 
+Para usar `irxnlvl` en scripts de Python solo necesitas instalar el paquete:
+
     pip install irxnlvl
+    
+Para usarlo en documentos de Jupyter también debes tener instalado [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/getting_started/installation.html).
 
 Crea tu primer diagrama
 ------
