@@ -42,7 +42,7 @@ Sólo puedes tener una línea de base que representa el cero de las energías re
 - `mode` - elije entre `'normal'` o `'dashed'`. Controla la apariencia de la arista en términos de la discontinuidad de la línea.
 - `opacity` - un flotante entre 0.0 y 1.0 representando la opacidad de la arista.
 
-### Agregar niveles de energía
+### Agregar los niveles de energía
 
     p +  level(energy(0, 'kjmol'),  1,  '1',  0x0)
 
@@ -54,7 +54,7 @@ Cada objeto `level` toma los siguientes argumentos:
 
 ### Unir los niveles de energía
 
-    p +  edge(    '1',  'EC1', 0x0, 0.4, 'normal')
+    p +  edge(  '1',  'EC1', 0x0, 0.4, 'normal')
 
 Cada `edge` toma los siguientes argumentos:
 - `start` - el `name` del nivel del que se origina la arista.
@@ -71,4 +71,4 @@ Cada `edge` toma los siguientes argumentos:
 
     p.write('diagrama.svg')
 
-Creará un archivo `diagrama.svg` de tu gráfica en la misma carpeta donde se abrió el Notebook.
+Creará un archivo `diagrama.svg` de tu gráfica en la misma carpeta donde se abrió el notebook.
