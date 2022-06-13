@@ -34,7 +34,7 @@ Los pasos utilizados en los ejemplos se explican a continuación.
 
 Ahora podemos empezar a agregar elementos al gráfico.
 
-### Agregar una línea base
+### Agrega una línea base
 
     p + baseline(colour=0x0, mode='dashed', opacity=0.1)
 
@@ -43,7 +43,7 @@ Sólo puedes tener una línea de base que representa el cero de las energías re
 - `mode` - elije entre `'normal'` o `'dashed'`. Controla la apariencia de la arista en términos de la discontinuidad de la línea.
 - `opacity` - un flotante entre 0.0 y 1.0 representando la opacidad de la arista.
 
-### Agregar los niveles de energía
+### Agrega los niveles de energía
 
     p +  level(energy(0, 'kjmol'),  1,  '1',  0x0)
 
@@ -53,7 +53,7 @@ Cada objeto `level` toma los siguientes argumentos:
 - `name` - el nombre del nivel en el esquema. Los niveles no deberían compartir el mismo nombre.
 - `colour` - un entero hexadecimal de 24 bits representando el color del nivel.
 
-### Unir los niveles de energía
+### Une los niveles de energía
 
     p +  edge(  '1',  'EC1', 0x0, 0.4, 'normal')
 
@@ -64,11 +64,11 @@ Cada `edge` toma los siguientes argumentos:
 - `opacity` - un flotante entre 0.0 y 1.0 representando la opacidad de la arista.
 - `mode` - elije entre `'normal'` o `'dashed'`. Controla la apariencia de la arista en términos de la discontinuidad de la línea.
 
-### Visualizar el diagrama
+### Visualiza el diagrama
 
     p.render()
 
-### Y si es correcto guardarlo
+### Y si es correcto guárdalo
 
     p.write('diagrama.svg')
 
