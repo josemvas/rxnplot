@@ -21,7 +21,7 @@ Para instalar `irxnlvl` debes tener disponible pip:
 Modifica los diagramas de ejemplo
 ------
 
-Para crear diagramas requerirás escribir código de Python, pero incluso si nunca has usado Python puedes aprender rápidamente corriendo estos ejemplos:
+Para crear diagramas requerirás escribir código de Python, pero incluso si nunca has usado Python puedes aprender rápidamente experimentando con estos ejemplos:
 
 - [Abrir el ejemplo 1 en Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD?labpath=example1.ipynb)
 - [Abrir el ejemplo 2 en Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD?labpath=example2.ipynb)
