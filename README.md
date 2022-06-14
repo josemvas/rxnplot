@@ -25,13 +25,13 @@ Para crear diagramas requerirás escribir código de Python, pero incluso si nun
 - [Abrir el ejemplo 1 en Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD?labpath=example1.ipynb)
 - [Abrir el ejemplo 2 en Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD?labpath=example2.ipynb)
 
-Los pasos utilizados para crear los diagramas se explican a continuación.
+Los pasos para crear un diagrama se detallan a continuación:
 
-### Primero importa todo el contenido del módulo
+### Primero importa el módulo
 
     from irxnlvl import *
 
-### y crea un objeto de gráfico
+### y crea un objeto de gráfico vacío
 
     p = plot(10.0, bgcolour=None, zero=energy(0.0, 'kjmol'), units='kjmol', digits=1)
     
