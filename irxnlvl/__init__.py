@@ -178,13 +178,13 @@ class plot():
                           node.getVisualHeight(),
                           node.getName()
                          ))
-            svgstring += ('    <text x="{0}%" y="{1}%" dy="2.6ex" font-family="sans-serif" text-anchor="middle" font-size="10pt" fill="#000000">{2}</text>\n'.format(
+            svgstring += ('    <text x="{0}%" y="{1}%" dy="2.5ex" font-family="sans-serif" text-anchor="middle" font-size="10pt" fill="#000000">{2}</text>\n'.format(
                           node.getVisualLeft()+sliceWidth/2,
                           node.getVisualHeight(),
                           node.getUnqualifiedEnergy(self.zero.energy, self.units, self.digits)
                          ))
             if self.qualified:
-                svgstring += ('    <text x="{0}%" y="{1}%" dy="5.3ex" font-family="sans-serif" text-anchor="middle" font-size="8pt" fill="#000000">{2}</text>\n'.format(
+                svgstring += ('    <text x="{0}%" y="{1}%" dy="5.2ex" font-family="sans-serif" text-anchor="middle" font-size="8pt" fill="#000000">{2}</text>\n'.format(
                           node.getVisualLeft()+sliceWidth/2,
                           node.getVisualHeight(),
                           unit_prettyprint[self.units]
