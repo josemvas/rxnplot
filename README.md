@@ -10,11 +10,10 @@ Pruébalo en Binder
 
 Puedes [probar irxnvl en Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD) sin necesidad de instalar nada en tu computadora.
 
-
-Instalación local
+o instálalo localmente
 ------
 
-Para usar `irxnlvl` en scripts de Python solo necesitas instalar el paquete:
+Para instalar `irxnlvl` debes tener Python 3 y pip:
 
     pip install irxnlvl
     
