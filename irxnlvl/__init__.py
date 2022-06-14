@@ -24,6 +24,7 @@ from .baseline import baseline
 from .rxnlvl_util import validateColour, appendTextFile
 import sys, os
 from IPython.display import SVG, display
+from cairosvg import svg2png
 
 class plot():
    # height = 10
@@ -196,6 +197,12 @@ class plot():
         self.svgstring = svgstring
         display(SVG(self.svgstring))
 
-    def write(self, filename):
-        with open(filename, 'w') as f:
-            f.write(self.svgstring)
+    def write(self, filename, scale=1):
+        if filename.lower().endswith('.svg'):
+            with open(filename, 'w') as f:
+                f.write(self.svgstring)
+        elif filename.lower().endswith('.png') \
+          or filename.lower().endswith('.jpg') \
+          or filename.lower().endswith('.jpeg'):
+            svg2png(p.svgstring, write_to=filename, scale=scale)
+

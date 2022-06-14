@@ -4,7 +4,7 @@ irxnlvl
 Es un paquete de Python para dibujar fácilmente diagramas de niveles de energía de reacciones químicas. Está basado en el paquete
 [rxnlvl](https://github.com/eutactic/rxnlvl) pero tiene soporte para documentos de Jupyter y opciones adicionales para ajustar las unidades de los diagramas. Para usarlo necesitas tener Python 3 e instalar `irxnlvl` o puedes [probar irxnvl en Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD) sin necesidad de instalar nada en tu computadora.
 
-![diagrama 2](diagram2.png)
+![diagrama 2](assets/diagram2.png)
 
 Instalación local
 ------
@@ -68,8 +68,8 @@ Cada objeto `level` toma los siguientes argumentos:
     p +  edge(  '1',  'EC1', 0x0, 0.4, 'normal')
 
 Cada `edge` toma los siguientes argumentos:
-- `start` - el `name` del nivel del que se origina la arista.
-- `end` - el `name` del nivel en el que termina la arista. Éste tiene que ser diferente de `start`.
+- `start` - el `nombre` del nivel del que se origina la arista.
+- `end` - el `nombre` del nivel en el que termina la arista. Éste tiene que ser diferente de `start`.
 - `colour` - un entero hexadecimal de 24 bits representando el color de la arista.
 - `opacity` - un flotante entre 0.0 y 1.0 representando la opacidad de la arista.
 - `mode` - elije entre `'normal'` o `'dashed'`. Controla la apariencia de la arista en términos de la discontinuidad de la línea.
@@ -82,4 +82,6 @@ Cada `edge` toma los siguientes argumentos:
 
     p.write('diagrama.svg')
 
-Creará un archivo `diagrama.svg` de tu gráfica en la misma carpeta donde se abrió el notebook.
+Creará un archivo de tu gráfica en la misma carpeta donde se abrió el notebook. Puede escribir archivos SVG, PNG y JPEG, y acepta
+las siguientes opciones:
+- `scale` - La escala de la imagen, por ejemplo scale=2 duplicará el tamaño original de la imagen.
