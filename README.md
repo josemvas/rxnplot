@@ -25,7 +25,7 @@ Para crear diagramas requerirás escribir código de Python, pero incluso si nun
 - [Correr el ejemplo 1 en Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD?labpath=example1.ipynb)
 - [Correr el ejemplo 2 en Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD?labpath=example2.ipynb)
 
-Examina los ejemplos paso a paso
+Sigue los ejemplos paso a paso
 ------
 
 ### Primero importa el módulo
@@ -34,7 +34,7 @@ Examina los ejemplos paso a paso
 
 ### y crea un objeto de gráfico vacío
 
-    p = plot(10.0, bgcolour=None, zero=energy(0.0, 'kjmol'), units='kjmol', digits=1)
+    p = plot(10.0, zero=energy(0.0, 'kjmol'), units='kcalmol', digits=1True)
     
 El objeto `plot` requiere los siguientes argumentos:
 - `size` - El tamaño vertical del gráfico en cm.
@@ -55,9 +55,11 @@ El objeto `baseline` es una línea que representa el cero de energía y requiere
 - `mode` - elije entre `'normal'` o `'dashed'`. Controla la apariencia de la arista en términos de la discontinuidad de la línea.
 - `opacity` - un flotante entre 0.0 y 1.0 representando la opacidad de la arista.
 
-### Agrega los niveles de energía
+### Agrega algunos niveles de energía
 
-    p + level(energy(0, 'kjmol'),  1,  '1',  0x0)
+    p + level( energy(0, 'kjmol'),  1,   '1',  0x0)
+    p + level( energy(0, 'kjmol'),  2, 'TS1',  0x0)
+    p + level( energy(0, 'kjmol'),  3,   '2',  0x0)
 
 Cada objeto `level` requiere los siguientes argumentos:
 - `energy` - un objeto que representa la energía relativa del nivel. El objeto `energy` tiene dos argumentos: la energía como un número de punto flotante y las unidades, que pueden ser `'kjmol'`, `'eh'` (Hartrees), `'ev'` (electronvoltios), `'kcalmol'` (kilocalorías por mol termoquímicas) o `'wavenumber'`.
@@ -67,7 +69,8 @@ Cada objeto `level` requiere los siguientes argumentos:
 
 ### Une los niveles de energía
 
-    p + edge(  '1',  'EC1', 0x0, 0.4, 'normal')
+    p + edge(   '1', 'TS1',  0x0,  0.4,  'normal')
+    p + edge( 'TS1',   '2',  0x0,  0.4,  'normal')
 
 Cada objeto `edge` acepta los siguientes argumentos:
 - `start` - el `nombre` del nivel del que se origina la arista.
