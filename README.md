@@ -13,7 +13,7 @@ Puedes [probar irxnvl en Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/H
 o instálalo localmente
 ------
 
-Para instalar `irxnlvl` debes tener Python 3 y pip:
+Para instalar `irxnlvl` debes tener disponible Python 3 y pip:
 
     pip install irxnlvl
 
