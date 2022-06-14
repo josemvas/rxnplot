@@ -78,7 +78,7 @@ Cada objeto `edge` acepta los siguientes argumentos:
 
     p.render()
 
-### Y si es correcto guárdalo
+### Y guárdalo si todo está bien
 
     p.write('diagrama.svg')
 
