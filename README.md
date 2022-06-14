@@ -17,7 +17,7 @@ Para instalar `irxnlvl` debes tener Python 3 y pip:
 
     pip install irxnlvl
     
-Para usarlo en documentos de Jupyter también debes tener instalado [Jupyter Lab o Jupyter Notebook](https://jupyter.org/install).
+Para usarlo en documentos de Jupyter también debes instalar [Jupyter](https://jupyter.org/install).
 
 Crea tu primer diagrama
 ------
