@@ -201,8 +201,6 @@ class plot():
         if filename.lower().endswith('.svg'):
             with open(filename, 'w') as f:
                 f.write(self.svgstring)
-        elif filename.lower().endswith('.png') \
-          or filename.lower().endswith('.jpg') \
-          or filename.lower().endswith('.jpeg'):
-            svg2png(p.svgstring, write_to=filename, scale=scale)
+        else:
+            svg2png(self.svgstring, write_to=filename, scale=scale)
 
