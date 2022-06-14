@@ -2,7 +2,7 @@ irxnlvl
 ======
 
 Es un paquete de Python para dibujar diagramas de niveles de energía de reacciones químicas. Está basado en el paquete
-[rxnlvl](https://github.com/eutactic/rxnlvl) pero tiene soporte para documentos de Jupyter y opciones adicionales para ajustar las unidades de energía.
+[rxnlvl](https://github.com/eutactic/rxnlvl) pero tiene soporte para documentos de [Jupyter](https://jupyter.org) y opciones adicionales para ajustar las unidades de energía.
 ![diagrama](irxnlvl/img/diagram.png)
 
 Pruébalo en Binder
