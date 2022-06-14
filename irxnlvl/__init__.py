@@ -75,7 +75,7 @@ class plot():
             self.bottombuf = 12.0
         else:
             self.bottombuf = 8.0
-        self.hbuf = 2.0
+        self.hbuf = 3.0
 
     def __add__(self, object):
         {'edge':self.__add_edge, 'level':self.__add_node, 'baseline':self.__add_baseline}[object.__class__.__name__](object)
