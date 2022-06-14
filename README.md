@@ -31,7 +31,7 @@ Los pasos utilizados en los ejemplos se explican a continuación.
 
 ### Crea un diagrama vacío para poder agregar elementos
 
-    p = plot(10.0, vbuf=10.0, hbuf=5.0, bgcolour=None, zero=energy(0.0, 'kjmol'), units='kjmol', digits=1)
+    p = plot(10.0, bgcolour=None, zero=energy(0.0, 'kjmol'), units='kjmol', digits=1)
     
 El objeto `plot` requiere los siguientes argumentos:
 - `size` - El tamaño vertical del gráfico en cm.
