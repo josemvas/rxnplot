@@ -70,12 +70,12 @@ class plot():
             sys.stderr.write(str(e))
             sys.exit(1)
         self.digits = int(digits)
-        self.topbuf = 10.0
+        self.topbuf = 8.0
         if self.qualified:
             self.bottombuf = 12.0
         else:
             self.bottombuf = 8.0
-        self.hbuf = 4.0
+        self.hbuf = 2.0
 
     def __add__(self, object):
         {'edge':self.__add_edge, 'level':self.__add_node, 'baseline':self.__add_baseline}[object.__class__.__name__](object)
@@ -173,7 +173,7 @@ class plot():
                           # Courtesy of Tim Pietzcker
                           "{0:#0{1}x}".format(node.getColour(),8)[2:]
                          ))
-            svgstring += ('    <text x="{0}%" y="{1}%" dy="-1ex" font-family="sans-serif" text-anchor="middle" font-weight="bold" fill="#000000">{2}</text>\n'.format(
+            svgstring += ('    <text x="{0}%" y="{1}%" dy="-0.9ex" font-family="sans-serif" text-anchor="middle" font-weight="bold" fill="#000000">{2}</text>\n'.format(
                           node.getVisualLeft()+sliceWidth/2,
                           node.getVisualHeight(),
                           node.getName()
