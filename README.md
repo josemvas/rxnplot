@@ -82,6 +82,6 @@ Cada objeto `edge` acepta los siguientes argumentos:
 
     p.write('diagrama.svg')
 
-Creará un archivo de tu gráfica en la misma carpeta donde se abrió el notebook. Puede escribir archivos SVG, PNG y JPEG, y acepta
+Creará un archivo de tu gráfica en la misma carpeta donde se abrió el notebook. Puede escribir archivos SVG, PDF y PNG y acepta
 las siguientes opciones:
-- `scale` - La escala de la imagen, por ejemplo scale=2 duplicará el tamaño original de la imagen.
+- `scale` - La resolución de la imagen cuando se guarda en formato PNG, por ejemplo scale=2 duplicará el tamaño original de la imagen.
