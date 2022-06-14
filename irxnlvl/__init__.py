@@ -77,9 +77,8 @@ class plot():
             self.bottombuf = 8.0
         self.hbuf = 4.0
 
-    def __iadd__(self, object):
+    def __add__(self, object):
         {'edge':self.__add_edge, 'level':self.__add_node, 'baseline':self.__add_baseline}[object.__class__.__name__](object)
-        return self
 
     def __add_node(self, node):
         self.nodes.append(node)
