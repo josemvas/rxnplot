@@ -70,7 +70,7 @@ class plot():
             sys.stderr.write(str(e))
             sys.exit(1)
         self.digits = int(digits)
-        self.topbuf = 8.0
+        self.topbuf = 9.0
         if self.qualified:
             self.bottombuf = 12.0
         else:
