@@ -25,7 +25,7 @@ Para crear diagramas requerirás escribir código de Python, pero incluso si nun
 - [Correr el ejemplo 1 en Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD?labpath=example1.ipynb)
 - [Correr el ejemplo 2 en Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD?labpath=example2.ipynb)
 
-Entiende los pasos
+Examina los ejemplos paso a paso
 ------
 
 ### Primero importa el módulo
