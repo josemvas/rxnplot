@@ -27,11 +27,11 @@ Para crear diagramas requerirás escribir código de Python, pero incluso si nun
 
 Los pasos utilizados para crear los diagramas se explican a continuación.
 
-### Importa todo el contenido del módulo
+### Primero importa todo el contenido del módulo
 
     from irxnlvl import *
 
-### Primero crea un objeto de gráfico
+### y crea un objeto de gráfico
 
     p = plot(10.0, bgcolour=None, zero=energy(0.0, 'kjmol'), units='kjmol', digits=1)
     
@@ -79,7 +79,7 @@ Cada objeto `edge` acepta los siguientes argumentos:
 
     p.render()
 
-### Y guárdalo si todo luce bien
+### y guárdalo si todo luce bien
 
     p.write('diagrama.svg')
 
