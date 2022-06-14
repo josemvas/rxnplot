@@ -24,7 +24,7 @@ from .baseline import baseline
 from .rxnlvl_util import validateColour, appendTextFile
 import sys, os
 from IPython.display import SVG, display
-from cairosvg import svg2png
+from cairosvg import svg2png, svg2pdf
 
 class plot():
    # height = 10
@@ -201,6 +201,10 @@ class plot():
         if filename.lower().endswith('.svg'):
             with open(filename, 'w') as f:
                 f.write(self.svgstring)
-        else:
+        elif filename.lower().endswith('.pdf'):
+            svg2pdf(self.svgstring, write_to=filename)
+        elif filename.lower().endswith('.png'):
             svg2png(self.svgstring, write_to=filename, scale=scale)
+        else:
+            print('Formato de imagen no soportado')
 
