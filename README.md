@@ -20,7 +20,7 @@ Para instalar `irxnlvl` debes tener Python 3 y pip:
 Crea tu primer diagrama
 ------
 
-Para crear diagramas requerirás escribir código de Python, pero incluso si nunca has usado Python puedes hacerlo siguiendo los siguientes ejemplos:
+Para crear diagramas requerirás escribir código de Python, pero incluso si nunca has usado Python puedes aprender con estos ejemplos interactivos:
 
 - [Abrir el ejemplo 1 en Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD?labpath=example1.ipynb)
 - [Abrir el ejemplo 2 en Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD?labpath=example2.ipynb)
@@ -31,7 +31,7 @@ Los pasos utilizados en estos ejemplos se explican a continuación.
 
     from irxnlvl import *
 
-### Primero crea un objeto de diagrama
+### Primero crea un objeto de gráfico
 
     p = plot(10.0, bgcolour=None, zero=energy(0.0, 'kjmol'), units='kjmol', digits=1)
     
