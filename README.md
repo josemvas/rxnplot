@@ -3,6 +3,7 @@ irxnlvl
 
 Es un paquete de Python 3 para dibujar diagramas de niveles de energía de reacciones químicas. Está basado en el paquete
 [rxnlvl](https://github.com/eutactic/rxnlvl) pero tiene soporte para documentos de [Jupyter](https://jupyter.org) y opciones adicionales para ajustar las unidades de energía.
+
 ![diagrama](irxnlvl/img/diagram.png)
 
 Pruébalo en Binder
@@ -17,15 +18,15 @@ Para instalar `irxnlvl` debes tener disponible pip:
 
     pip install irxnlvl
 
-Crea tu primer diagrama
+Modifica los diagramas de ejemplo
 ------
 
-Para crear diagramas requerirás escribir código de Python, pero incluso si nunca has usado Python puedes aprender rápidamente corriendo los ejemplos:
+Para crear diagramas requerirás escribir código de Python, pero incluso si nunca has usado Python puedes aprender rápidamente corriendo estos ejemplos:
 
-- [Correr el ejemplo 1 en Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD?labpath=example1.ipynb)
-- [Correr el ejemplo 2 en Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD?labpath=example2.ipynb)
+- [Abrir el ejemplo 1 en Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD?labpath=example1.ipynb)
+- [Abrir el ejemplo 2 en Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD?labpath=example2.ipynb)
 
-Sigue los ejemplos paso a paso
+o construye uno desde cero
 ------
 
 ### Primero importa el módulo
@@ -83,7 +84,7 @@ Cada objeto `edge` acepta los siguientes argumentos:
 
     p.render()
 
-### y guárdalo si todo luce bien
+### y si todo luce bien guárdalo
 
     p.write('diagrama.svg')
 
