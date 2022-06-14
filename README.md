@@ -1,7 +1,7 @@
 irxnlvl
 ======
 
-Es un paquete de Python para dibujar fácilmente diagramas de niveles de energía de reacciones químicas. Está basado en el paquete
+Es un paquete de Python para dibujar diagramas de niveles de energía de reacciones químicas. Está basado en el paquete
 [rxnlvl](https://github.com/eutactic/rxnlvl) pero tiene soporte para documentos de Jupyter y opciones adicionales para ajustar las unidades de energía.
 ![diagrama](irxnlvl/img/diagram.png)
 
@@ -16,24 +16,22 @@ o instálalo localmente
 Para instalar `irxnlvl` debes tener Python 3 y pip:
 
     pip install irxnlvl
-    
-Para usarlo en documentos de Jupyter también debes instalar [Jupyter](https://jupyter.org/install).
 
 Crea tu primer diagrama
 ------
 
-Para crear diagramas requerirás escribir código de Python, pero incluso si no sabes Python puedes aprender rápidamente explorando los siguientes ejemplos:
+Para crear los diagramas requerirás escribir código de Python, pero incluso si no nunca has usado Python puedes aprender fácilmente estudiando los siguientes ejemplos:
 
 - [Abrir el ejemplo 1 en Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD?labpath=example1.ipynb)
 - [Abrir el ejemplo 2 en Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD?labpath=example2.ipynb)
 
-Los pasos utilizados en los ejemplos se explican a continuación.
+Los pasos utilizados en estos ejemplos se explican a continuación.
 
 ### Importa todo el contenido del módulo
 
     from irxnlvl import *
 
-### Crea un diagrama vacío para poder agregar elementos
+### Primero crea un objeto de diagrama
 
     p = plot(10.0, bgcolour=None, zero=energy(0.0, 'kjmol'), units='kjmol', digits=1)
     
@@ -45,8 +43,7 @@ El objeto `plot` requiere los siguientes argumentos:
 - `digits` - Los dígitos después del punto decimal que se usarán para mostrar las energías del diagrama.
 - `qualified` - Si es `True`, las unidades en las que cada energía es especificada serán impresas en la imagen. Si es `False`, sólo imprimirá los valores numéricos.
 
-
-Ahora podemos empezar a agregar elementos al gráfico.
+Ahora puedes empezar a agregar elementos al gráfico.
 
 ### Agrega una línea base
 
