@@ -10,6 +10,7 @@ Pruébalo en Binder
 ------
 
 Puedes [probar irxnvl en Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD) sin necesidad de instalar nada en tu computadora.
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD)
 
 o instálalo localmente
 ------
