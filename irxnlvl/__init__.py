@@ -166,7 +166,7 @@ class plot():
                          ))
         # Draw energy levels as well as their annotations
         for node in self.nodes:
-            svgstring += ('    <line x1="{0}%" x2="{1}%" y1="{2}%" y2="{2}%" stroke-linecap="round" stroke="#{3}" stroke-width="3"/>\n'.format(
+            svgstring += ('    <line x1="{0}%" x2="{1}%" y1="{2}%" y2="{2}%" stroke-linecap="round" stroke="#{3}" stroke-width="4"/>\n'.format(
                           node.getVisualLeft(),
                           node.getVisualRight(),
                           node.getVisualHeight(),

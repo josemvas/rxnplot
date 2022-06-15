@@ -70,8 +70,8 @@ Cada objeto `level` requiere los siguientes argumentos:
 
 ### Une los niveles de energía
 
-    p + edge(   '1', 'TS1',  0x0,  0.4,  'normal')
-    p + edge( 'TS1',   '2',  0x0,  0.4,  'normal')
+    p + edge(   '1', 'TS1',  0x0,  0.5,  'normal')
+    p + edge( 'TS1',   '2',  0x0,  0.5,  'normal')
 
 Cada objeto `edge` acepta los siguientes argumentos:
 - `start` - el `nombre` del nivel del que se origina la arista.
