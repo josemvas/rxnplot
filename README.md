@@ -1,4 +1,4 @@
-irxnlvl
+rxnplot
 ======
 
 Es un paquete de Python 3 para dibujar diagramas de niveles de energía de reacciones químicas. Está basado en el paquete
@@ -11,29 +11,29 @@ Pruébalo en Binder
 
 Puedes probar irxnvl en Binder sin necesidad de instalar nada en tu computadora.
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/qcuaeh/rxnplot.git/HEAD)
 
 o instálalo localmente
 ------
 
-Para instalar `irxnlvl` debes tener disponible pip:
+Para instalar `rxnplot` debes tener disponible pip:
 
-    pip install irxnlvl
+    pip install rxnplot
 
 Modifica los diagramas de ejemplo
 ------
 
 Para crear diagramas requerirás escribir código de Python, pero incluso si nunca has usado Python puedes aprender rápidamente experimentando con estos ejemplos:
 
-- [Abrir el ejemplo 1 en Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD?labpath=example1.ipynb)
-- [Abrir el ejemplo 2 en Binder](https://mybinder.org/v2/gh/qcuaeh/irxnlvl.git/HEAD?labpath=example2.ipynb)
+- [Abrir el ejemplo 1 en Binder](https://mybinder.org/v2/gh/qcuaeh/rxnplot.git/HEAD?labpath=example1.ipynb)
+- [Abrir el ejemplo 2 en Binder](https://mybinder.org/v2/gh/qcuaeh/rxnplot.git/HEAD?labpath=example2.ipynb)
 
 o construye uno desde cero
 ------
 
 ### Primero importa el módulo
 
-    from irxnlvl import *
+    from rxnplot import *
 
 ### y crea un objeto de gráfico vacío
 
