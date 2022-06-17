@@ -14,4 +14,5 @@ if getuser() == 'jovyan' and argv[1] == 'bdist_wheel':
     remove(path.join(here, 'setup.cfg'))
     remove(path.join(here, 'setup.py'))
     rmtree(path.join(here, 'build'))
+    rmtree(path.join(here, 'rxnplot'))
     rmtree(path.join(here, 'rxnplot.egg-info'))
