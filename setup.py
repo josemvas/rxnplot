@@ -18,10 +18,10 @@ if getuser() == 'jovyan':
 #        rmtree(path.join(here, 'build'))
 #    if path.isdir(path.join(here, 'rxnplot.egg-info')):
 #        rmtree(path.join(here, 'rxnplot.egg-info'))
-    remove(path.join(here, 'README.md'))
-    remove(path.join(here, 'image1.png'))
-    remove(path.join(here, 'setup.cfg'))
-    remove(path.join(here, 'setup.py'))
+#    remove(path.join(here, 'README.md'))
+#    remove(path.join(here, 'image1.png'))
+#    remove(path.join(here, 'setup.cfg'))
+#    remove(path.join(here, 'setup.py'))
     with open(path.join(here, str(getpid()) + '_listdir.log'), 'w') as f:
         for item in listdir():
             f.write('{}\n'.format(item))
