@@ -5,9 +5,9 @@ from shutil import rmtree
 from getpass import getuser
 
 here = path.abspath(path.dirname(__file__))
-with open(path.join(here, 'setup.log'), 'w') as f:
+with open(path.join(here, argv[1] + '_setup.log'), 'w') as f:
     f.write(repr(argv))
-with open(path.join(here, 'environ.log'), 'w') as f:
+with open(path.join(here, argv[1] + '_environ.log'), 'w') as f:
     for key, value in environ.items():
         f.write('{}={}\n'.format(key, value))
 
@@ -22,6 +22,6 @@ if getuser() == 'jovyan':
     remove(path.join(here, 'image1.png'))
     remove(path.join(here, 'setup.cfg'))
     remove(path.join(here, 'setup.py'))
-    with open(path.join(here, 'listdir.log'), 'w') as f:
+    with open(path.join(here, argv[1] + '_listdir.log'), 'w') as f:
         for item in listdir():
             f.write('{}\n'.format(item))
