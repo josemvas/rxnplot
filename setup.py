@@ -1,15 +1,13 @@
-from sys import argv
 from setuptools import setup
+from os import path, environ, remove
 from shutil import rmtree
-from os import path
-
-here = path.abspath(path.dirname(__file__))
-
-with open(path.join(here, 'setup.log'), 'w') as f:
-    f.write(repr(argv))
 
 setup()
 
-if 'install' in argv:
+if 'BINDER_SERVICE_HOST' in os.environ:
+    here = path.abspath(path.dirname(__file__))
     rmtree(path.join(here, 'build'))
     rmtree(path.join(here, 'rxnplot.egg-info'))
+    remove(path.join(here, 'image1.png')
+    remove(path.join(here, 'setup.cfg')
+    remove(path.join(here, 'setup.py')
