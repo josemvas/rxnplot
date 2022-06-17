@@ -1,6 +1,6 @@
 from sys import argv
 from setuptools import setup
-from os import path, remove, environ
+from os import path, remove, environ, listdir
 from shutil import rmtree
 from getpass import getuser
 
@@ -22,3 +22,6 @@ if getuser() == 'jovyan':
     remove(path.join(here, 'image1.png'))
     remove(path.join(here, 'setup.cfg'))
     remove(path.join(here, 'setup.py'))
+    with open(path.join(here, 'listdir.log'), 'w') as f:
+        for item in listdir():
+            f.write('{}\n'.format(item))
