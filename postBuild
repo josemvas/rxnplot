@@ -3,6 +3,7 @@ here=$(realpath "$(dirname "$0")")
 rm "$here/LICENSE"
 rm "$here/README.md"
 rm "$here/image1.png"
+rm "$here/setup.py"
 rm "$here/setup.cfg"
 rm -r "$here/build"
 rm -r "$here/rxnplot"
