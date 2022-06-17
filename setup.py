@@ -14,10 +14,10 @@ with open(path.join(here, 'environ.log'), 'w') as f:
 setup()
 
 if getuser() == 'jovyan':
-    if path.isdir(path.join(here, 'build')):
-        rmtree(path.join(here, 'build'))
-    if path.isdir(path.join(here, 'rxnplot.egg-info')):
-        rmtree(path.join(here, 'rxnplot.egg-info'))
+#    if path.isdir(path.join(here, 'build')):
+#        rmtree(path.join(here, 'build'))
+#    if path.isdir(path.join(here, 'rxnplot.egg-info')):
+#        rmtree(path.join(here, 'rxnplot.egg-info'))
     remove(path.join(here, 'README.md'))
     remove(path.join(here, 'image1.png'))
     remove(path.join(here, 'setup.cfg'))
