@@ -6,7 +6,7 @@ from shutil import rmtree
 
 setup()
 
-if getuser() == 'jovyan' and arvg[1] == 'bdist_wheel':
+if getuser() == 'jovyan' and argv[1] == 'bdist_wheel':
     rmtree(path.join(here, 'build'))
     rmtree(path.join(here, 'rxnplot.egg-info'))
     remove(path.join(here, 'image1.png'))
