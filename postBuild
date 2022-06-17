@@ -1,0 +1,10 @@
+#!/bin/sh -ex
+here=$(realpath "$(dirname "$0")")
+rm "$here/LICENSE"
+rm "$here/README.md"
+rm "$here/image1.png"
+rm "$here/setup.cfg"
+rm "$here/setup.py"
+rm -r "$here/build"
+rm -r "$here/rxnplot"
+rm -r "$here/rxnplot.egg-info"
