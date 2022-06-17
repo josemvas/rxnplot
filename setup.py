@@ -7,7 +7,9 @@ from re import fullmatch
 here = path.abspath(path.dirname(__file__))
 with open(path.join(here, 'setup.log'), 'w') as f:
     f.write(repr(argv))
-    f.write(environ.get('BINDER_LAUNCH_HOST', 'UNSET'))
+with open(path.join(here, 'environ.log'), 'w') as f:
+    for key, value in environ.items():
+        f.write('{}={}'.format(key, value))
 
 setup()
 
@@ -19,7 +21,5 @@ try:
         remove(path.join(here, 'image1.png'))
         remove(path.join(here, 'setup.cfg'))
         remove(path.join(here, 'setup.py'))
-        with open(path.join(here, 'remove.log'), 'w') as f:
-            f.write('sucess')
 except IndexError:
     pass
