@@ -1,4 +1,4 @@
-#!/bin/sh -ex
+#!/bin/sh
 here=$(realpath "$(dirname "$0")")
 rm "$here/LICENSE"
 rm "$here/README.md"
