@@ -7,14 +7,13 @@ rxnplot
 
 ![diagrama](rxnplot.png)
 
-Instala rxnplot
-------
+### Instala rxnplot
 
 Puedes instalar **rxnplot** en tu computadora con pip:
 
     pip install rxnplot
 
-Usa rxnplot en Binder
+Prueba rxnplot en Binder
 ------
 
 Para crear diagramas requerirás escribir código de Python, pero incluso si nunca has usado Python puedes aprender rápidamente experimentando con estos ejemplos:
