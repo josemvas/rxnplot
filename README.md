@@ -7,9 +7,10 @@ Es un paquete de Python 3 para dibujar diagramas de niveles de energía de reacc
 
 ![diagrama](rxnplot.png)
 
-Puedes usar `rxnplot` en [Binder](https://mybinder.org/v2/gh/qcuaeh/rxnplot.git/HEAD?labpath=tests) sin necesidad de instalar nada en tu computadora.
+Instala el programa
+------
 
-o puedes usar `rxnplot` localmente instalando el paquete con pip:
+Puedes usar `rxnplot` en [Binder](https://mybinder.org/v2/gh/qcuaeh/rxnplot.git/HEAD?labpath=tests) o puedes instalar el paquete en tu computadora con pip:
 
     pip install rxnplot
 
