@@ -1,0 +1,3 @@
+#!/bin/bash
+rm -r "$HOME/build"
+rm -r "$HOME/rxnplot.egg-info"
