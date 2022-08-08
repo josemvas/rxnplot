@@ -2,28 +2,25 @@ rxnplot
 ======
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/qcuaeh/rxnplot.git/HEAD?labpath=tests)
 
-Es un paquete de Python 3 para dibujar diagramas de niveles de energía de reacciones químicas. Está basado en el paquete
+**rxnplot** es un paquete de Python 3 para dibujar diagramas de niveles de energía de reacciones químicas. Está basado en el paquete
 [rxnlvl](https://github.com/eutactic/rxnlvl) pero tiene soporte para documentos de [Jupyter](https://jupyter.org) y opciones adicionales para ajustar las unidades de energía.
 
 ![diagrama](rxnplot.png)
 
-Instala el programa
+Instala rxnplot
 ------
 
-Puedes usar `rxnplot` en [Binder](https://mybinder.org/v2/gh/qcuaeh/rxnplot.git/HEAD?labpath=tests) o puedes instalar el paquete en tu computadora con pip:
+Puedes instalar **rxnplot** en tu computadora con pip:
 
     pip install rxnplot
 
-Adapta los diagramas de ejemplo
+Usa rxnplot en Binder
 ------
 
 Para crear diagramas requerirás escribir código de Python, pero incluso si nunca has usado Python puedes aprender rápidamente experimentando con estos ejemplos:
 
 - [Abrir el ejemplo 1 en Binder](https://mybinder.org/v2/gh/qcuaeh/rxnplot.git/HEAD?labpath=example1.ipynb)
 - [Abrir el ejemplo 2 en Binder](https://mybinder.org/v2/gh/qcuaeh/rxnplot.git/HEAD?labpath=example2.ipynb)
-
-o construye un diagrama desde cero
-------
 
 ### Primero importa el módulo
 
