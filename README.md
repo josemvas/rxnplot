@@ -80,13 +80,15 @@ Cada objeto `edge` acepta los siguientes argumentos:
 
     p.render()
 
-### O guarda el diagrama en un archivo SVG, PDF o PNG
+Mostrará el diagrama en una celda del documento.
 
-    p.write('diagrama.svg')
+### o guarda el diagrama en un archivo
 
-Cuando se guarda como PNG se puede cambiar la resolución de la imagen con la opción `scale`. Por ejemplo 
+    p.write('diagrama.png')
+
+guardará el diagrama como PNG. Se puede cambiar el tamaño de la imagen guardada con la opción `scale`. Por ejemplo 
 
     p.write('diagrama.png', scale=2)
 
-Guardará la imagen con el doble de la resolución por defecto.
+guardará la imagen con el doble de la resolución por defecto. También se puede guardar la imagen como PDF o SVG.
 
