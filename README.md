@@ -22,7 +22,7 @@ También puede probar rxnplot sin necesidad de instalar nada en su computadora:
 - [Abrir el ejemplo 1 en Binder](https://mybinder.org/v2/gh/qcuaeh/rxnplot.git/HEAD?labpath=example1.ipynb)
 - [Abrir el ejemplo 2 en Binder](https://mybinder.org/v2/gh/qcuaeh/rxnplot.git/HEAD?labpath=example2.ipynb)
 
-Aprenda a construir un diagrama paso a paso
+Construya un diagrama paso a paso
 ------
 
 Para crear diagramas tendrá que escribir código de Python, pero incluso si nunca ha usado Python puede aprender a usar rxnplot rápidamente.
@@ -38,11 +38,11 @@ Para crear diagramas tendrá que escribir código de Python, pero incluso si nun
 El objeto `plot` requiere los siguientes argumentos:
 
 - `size` - El tamaño vertical del gráfico en cm.
-- `bgcolour` - El color de fondo de la imagen, como un entero hexadecimal de 24 bits, o `None`. Si `None`, el fondo será transparente.
-- `zero` - Un objeto `energy` que representa el cero de las energías relativas. El objeto `energy` tiene dos argumentos: la energía como un número de punto flotante y las unidades, que pueden ser `'kjmol'`, `'eh'` (Hartrees), `'ev'` (electronvoltios), `'kcalmol'` (kilocalorías por mol termoquímicas) o `'wavenumber'`.
+- `bgcolour` - El color de fondo de la imagen, como un entero hexadecimal de 24 bits o `None`. Si es `None`, el fondo será transparente.
+- `zero` - Un objeto `energy` que representa el cero de las energías relativas. Requiere dos argumentos: la energía como un número de punto flotante y las unidades que pueden ser `'kjmol'`, `'eh'` (Hartrees), `'ev'` (electronvoltios), `'kcalmol'` (kilocalorías por mol termoquímicas) o `'wavenumber'`.
 - `units` - Las unidades de energía del diagrama, que pueden ser `'kjmol'`, `'eh'` (Hartrees), `'ev'` (electronvoltios), `'kcalmol'` (kilocalorías por mol termoquímicas) o `'wavenumber'`.
-- `digits` - Los dígitos después del punto decimal que se usarán para mostrar las energías del diagrama.
-- `qualified` - Si es `True`, las unidades en las que cada energía es especificada serán impresas en la imagen. Si es `False`, sólo imprimirá los valores numéricos.
+- `digits` - Los dígitos después del punto decimal que se usarán para mostrar las energías en el diagrama.
+- `qualified` - Si es `True`, se mostrarán las unidades de energía en el diagrama, de lo contrario sólo se mostrarán los valores numéricos.
 
 Ahora puede empezar a agregar elementos al gráfico.
 
@@ -65,8 +65,8 @@ El objeto `baseline` es una línea que representa el cero de energía y requiere
 Cada objeto `level` requiere los siguientes argumentos:
 
 - `energy` - Un objeto que representa la energía relativa del nivel. El objeto `energy` tiene dos argumentos: la energía como un número de punto flotante y las unidades, que pueden ser `'kjmol'`, `'eh'` (Hartrees), `'ev'` (electronvoltios), `'kcalmol'` (kilocalorías por mol termoquímicas) o `'wavenumber'`.
-- `location` - La ubicación ordinal del nivel en el esquema. Éste debe ser un entero positivo diferente de cero. Diferentes niveles pueden compartir la misma ubicación.
-- `name` - El nombre del nivel en el esquema. Los niveles no deberían compartir el mismo nombre.
+- `location` - La ubicación ordinal del nivel en el diagrama, debe ser un entero positivo diferente de cero. Diferentes niveles pueden compartir la misma ubicación.
+- `name` - El nombre del nivel en el diagrama, que debe ser único.
 - `colour` - Un entero hexadecimal de 24 bits quw representa el color del nivel.
 
 ### Una los niveles de energía
@@ -77,7 +77,7 @@ Cada objeto `level` requiere los siguientes argumentos:
 Cada objeto `edge` acepta los siguientes argumentos:
 
 - `start` - El `nombre` del nivel del que se origina la arista.
-- `end` - El `nombre` del nivel en el que termina la arista. Éste tiene que ser diferente de `start`.
+- `end` - El `nombre` del nivel en el que termina la arista, tiene que ser diferente de `start`.
 - `colour` - Un entero hexadecimal de 24 bits representando el color de la arista.
 - `opacity` - Un flotante entre 0.0 y 1.0 representando la opacidad de la arista.
 - `mode` - Controla la apariencia de la arista, puede ser `'normal'` o `'dashed'`.
@@ -96,4 +96,4 @@ guardará el diagrama como PNG. Puede cambiar el tamaño de la imagen con la opc
 
     p.write('diagrama.png', scale=2)
 
-guardará la imagen con el doble de la resolución por defecto. También puede guardar la imagen como archivo PDF o SVG.
+guardará el diagrama con el doble de la resolución por defecto. También puede guardar el diagrama como archivo PDF o SVG.
