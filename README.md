@@ -17,10 +17,7 @@ Puede instalar **rxnplot** en su computadora con pip:
 Pruebe rxnplot en Binder
 ------
 
-También puede probar rxnplot sin necesidad de instalar nada en su computadora:
-
-- [Abrir el ejemplo 1 en Binder](https://mybinder.org/v2/gh/qcuaeh/rxnplot.git/HEAD?labpath=example1.ipynb)
-- [Abrir el ejemplo 2 en Binder](https://mybinder.org/v2/gh/qcuaeh/rxnplot.git/HEAD?labpath=example2.ipynb)
+También puede [Abrir rxnplot en Binder](https://mybinder.org/v2/gh/qcuaeh/rxnplot.git/HEAD?labpath=tests) sin necesidad de instalar nada en su computadora.
 
 Construya un diagrama paso a paso
 ------
@@ -69,7 +66,7 @@ Cada objeto `level` requiere los siguientes argumentos:
 - `name` - El nombre del nivel en el diagrama, que debe ser único.
 - `colour` - Un entero hexadecimal de 24 bits quw representa el color del nivel.
 
-### Una los niveles de energía
+### Conecte los niveles de energía
 
     p + edge(  '1', 'TS1',  0x0,  0.5,  'normal')
     p + edge('TS1',   '2',  0x0,  0.5,  'normal')
@@ -82,7 +79,7 @@ Cada objeto `edge` acepta los siguientes argumentos:
 - `opacity` - Un flotante entre 0.0 y 1.0 representando la opacidad de la arista.
 - `mode` - Controla la apariencia de la arista, puede ser `'normal'` o `'dashed'`.
 
-### Visualice el diagrama
+### Finalmente visualice el diagrama
 
     p.render()
 
