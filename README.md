@@ -7,7 +7,8 @@ rxnplot
 
 ![graphic](graphic.png)
 
-### Instale rxnplot
+Instale rxnplot
+------
 
 Puede instalar **rxnplot** en su computadora con pip:
 
@@ -16,13 +17,15 @@ Puede instalar **rxnplot** en su computadora con pip:
 Pruebe rxnplot en Binder
 ------
 
-Para crear diagramas tendrá que escribir código de Python, pero incluso si nunca ha usado Python puede aprender a usar rxnplot rápidamente probando estos ejemplos:
+También puede probar rxnplot sin necesidad de instalar nada en su computadora:
 
 - [Abrir el ejemplo 1 en Binder](https://mybinder.org/v2/gh/qcuaeh/rxnplot.git/HEAD?labpath=example1.ipynb)
 - [Abrir el ejemplo 2 en Binder](https://mybinder.org/v2/gh/qcuaeh/rxnplot.git/HEAD?labpath=example2.ipynb)
 
-Construya un diagrama paso por paso
+Aprenda a construir un diagrama paso a paso
 ------
+
+Para crear diagramas tendrá que escribir código de Python, pero incluso si nunca ha usado Python puede aprender a usar rxnplot rápidamente.
 
 ### Primero importe el módulo
 
@@ -55,9 +58,9 @@ El objeto `baseline` es una línea que representa el cero de energía y requiere
 
 ### Defina los niveles de energía
 
-    p + level( energy(0, 'kjmol'),  1,   '1',  0x0)
-    p + level( energy(0, 'kjmol'),  2, 'TS1',  0x0)
-    p + level( energy(0, 'kjmol'),  3,   '2',  0x0)
+    p + level(energy(0, 'kjmol'),  1,   '1',  0x0)
+    p + level(energy(0, 'kjmol'),  2, 'TS1',  0x0)
+    p + level(energy(0, 'kjmol'),  3,   '2',  0x0)
 
 Cada objeto `level` requiere los siguientes argumentos:
 
@@ -68,8 +71,8 @@ Cada objeto `level` requiere los siguientes argumentos:
 
 ### Una los niveles de energía
 
-    p + edge(   '1', 'TS1',  0x0,  0.5,  'normal')
-    p + edge( 'TS1',   '2',  0x0,  0.5,  'normal')
+    p + edge(  '1', 'TS1',  0x0,  0.5,  'normal')
+    p + edge('TS1',   '2',  0x0,  0.5,  'normal')
 
 Cada objeto `edge` acepta los siguientes argumentos:
 
@@ -94,4 +97,3 @@ guardará el diagrama como PNG. Puede cambiar el tamaño de la imagen con la opc
     p.write('diagrama.png', scale=2)
 
 guardará la imagen con el doble de la resolución por defecto. También puede guardar la imagen como archivo PDF o SVG.
-
