@@ -30,6 +30,7 @@ Para crear diagramas requerirás escribir código de Python, pero incluso si nun
     p = plot(10.0, zero=energy(0.0, 'kjmol'), units='kcalmol', digits=1True)
     
 El objeto `plot` requiere los siguientes argumentos:
+
 - `size` - El tamaño vertical del gráfico en cm.
 - `bgcolour` - el color de fondo de la imagen, como un entero hexadecimal de 24 bits, o `None`. Si `None`, el fondo será transparente.
 - `zero` - un objeto `energy` que representa el cero de las energías relativas. El objeto `energy` tiene dos argumentos: la energía como un número de punto flotante y las unidades, que pueden ser `'kjmol'`, `'eh'` (Hartrees), `'ev'` (electronvoltios), `'kcalmol'` (kilocalorías por mol termoquímicas) o `'wavenumber'`.
@@ -44,6 +45,7 @@ Ahora puedes empezar a agregar elementos al gráfico.
     p + baseline(colour=0x0, mode='dashed', opacity=0.1)
 
 El objeto `baseline` es una línea que representa el cero de energía y requiere los siguientes argumentos:
+
 - `colour` - un entero hexadecimal de 24 bits representando el color de la arista.
 - `mode` - elije entre `'normal'` o `'dashed'`. Controla la apariencia de la arista en términos de la discontinuidad de la línea.
 - `opacity` - un flotante entre 0.0 y 1.0 representando la opacidad de la arista.
@@ -55,6 +57,7 @@ El objeto `baseline` es una línea que representa el cero de energía y requiere
     p + level( energy(0, 'kjmol'),  3,   '2',  0x0)
 
 Cada objeto `level` requiere los siguientes argumentos:
+
 - `energy` - un objeto que representa la energía relativa del nivel. El objeto `energy` tiene dos argumentos: la energía como un número de punto flotante y las unidades, que pueden ser `'kjmol'`, `'eh'` (Hartrees), `'ev'` (electronvoltios), `'kcalmol'` (kilocalorías por mol termoquímicas) o `'wavenumber'`.
 - `location` - la ubicación ordinal del nivel en el esquema. Éste debe ser un entero positivo diferente de cero. Diferentes niveles pueden compartir la misma ubicación.
 - `name` - el nombre del nivel en el esquema. Los niveles no deberían compartir el mismo nombre.
@@ -66,6 +69,7 @@ Cada objeto `level` requiere los siguientes argumentos:
     p + edge( 'TS1',   '2',  0x0,  0.5,  'normal')
 
 Cada objeto `edge` acepta los siguientes argumentos:
+
 - `start` - el `nombre` del nivel del que se origina la arista.
 - `end` - el `nombre` del nivel en el que termina la arista. Éste tiene que ser diferente de `start`.
 - `colour` - un entero hexadecimal de 24 bits representando el color de la arista.
@@ -76,10 +80,13 @@ Cada objeto `edge` acepta los siguientes argumentos:
 
     p.render()
 
-### y si todo luce bien guárdalo
+### O guarda el diagrama en un archivo SVG, PDF o PNG
 
     p.write('diagrama.svg')
 
-Creará un archivo de tu gráfica en la misma carpeta donde se abrió el notebook. Puede escribir archivos SVG, PDF y PNG y acepta
-las siguientes opciones:
-- `scale` - La resolución de la imagen cuando se guarda en formato PNG, por ejemplo scale=2 duplicará el tamaño original de la imagen.
+Cuando se guarda como PNG se puede cambiar la resolución de la imagen con la opción `scale`. Por ejemplo 
+
+    p.write('diagrama.png', scale=2)
+
+Guardará la imagen con el doble de la resolución por defecto.
+
