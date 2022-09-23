@@ -17,12 +17,12 @@ Puede instalar **rxnplot** en su computadora con pip:
 Pruebe rxnplot en Binder
 ------
 
-También puede [Abrir rxnplot en Binder](https://mybinder.org/v2/gh/qcuaeh/rxnplot.git/HEAD?labpath=tests) sin necesidad de instalar nada en su computadora.
+También puede [abrir rxnplot en Binder](https://mybinder.org/v2/gh/qcuaeh/rxnplot.git/HEAD?labpath=tests) sin necesidad de instalar nada en su computadora.
 
 Construya un diagrama paso a paso
 ------
 
-Para crear diagramas tendrá que escribir código de Python, pero incluso si nunca ha usado Python puede aprender a usar rxnplot rápidamente.
+Para crear diagramas tendrá que escribir código de Python, pero incluso si nunca lo ha hecho puede aprender a construir diagramas rápidamente.
 
 ### Primero importe el módulo
 
@@ -32,7 +32,7 @@ Para crear diagramas tendrá que escribir código de Python, pero incluso si nun
 
     p = plot(10.0, zero=energy(0.0, 'kjmol'), units='kcalmol', digits=1True)
     
-El objeto `plot` requiere los siguientes argumentos:
+El objeto `plot` representa un diagrama inicialmente en blanco y requiere como argumentos:
 
 - `size` - El tamaño vertical del gráfico en cm.
 - `bgcolour` - El color de fondo de la imagen, como un entero hexadecimal de 24 bits o `None`. Si es `None`, el fondo será transparente.
@@ -47,7 +47,7 @@ Ahora puede empezar a agregar elementos al gráfico.
 
     p + baseline(colour=0x0, mode='dashed', opacity=0.1)
 
-El objeto `baseline` es una línea que representa el cero de energía y requiere los siguientes argumentos:
+El objeto `baseline` es una línea que representa el cero de energía y requiere como argumentos:
 
 - `colour` - Un entero hexadecimal de 24 bits quw representa el color de la arista.
 - `mode` - Controla la apariencia de la arista, puede ser `'normal'` o `'dashed'`.
@@ -59,7 +59,7 @@ El objeto `baseline` es una línea que representa el cero de energía y requiere
     p + level(energy(0, 'kjmol'),  2, 'TS1',  0x0)
     p + level(energy(0, 'kjmol'),  3,   '2',  0x0)
 
-Cada objeto `level` requiere los siguientes argumentos:
+Cada objeto `level` representa un nivel de energía y requiere como argumentos:
 
 - `energy` - Un objeto que representa la energía relativa del nivel. El objeto `energy` tiene dos argumentos: la energía como un número de punto flotante y las unidades, que pueden ser `'kjmol'`, `'eh'` (Hartrees), `'ev'` (electronvoltios), `'kcalmol'` (kilocalorías por mol termoquímicas) o `'wavenumber'`.
 - `location` - La ubicación ordinal del nivel en el diagrama, debe ser un entero positivo diferente de cero. Diferentes niveles pueden compartir la misma ubicación.
@@ -71,7 +71,7 @@ Cada objeto `level` requiere los siguientes argumentos:
     p + edge(  '1', 'TS1',  0x0,  0.5,  'normal')
     p + edge('TS1',   '2',  0x0,  0.5,  'normal')
 
-Cada objeto `edge` acepta los siguientes argumentos:
+Cada objeto `edge` representa una conexión entre dos niveles de energía y requiere como argumentos:
 
 - `start` - El `nombre` del nivel del que se origina la arista.
 - `end` - El `nombre` del nivel en el que termina la arista, tiene que ser diferente de `start`.
