@@ -17,12 +17,12 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import sys, os
 from .energy import energy, unit_conversion, unit_prettyprint
 from .level  import level
 from .edge   import edge
 from .baseline import baseline
-from .rxnlvl_util import validateColour, appendTextFile
-import sys, os
+from .rxnlvl_util import validateColour
 from IPython.display import SVG, display
 from cairosvg import svg2png, svg2pdf
 
@@ -36,13 +36,14 @@ class plot():
    # units      = 'kcalmol'
    # digits     = 1
 
-    def __init__(self, height, bgcolour=None, zero=energy(0, 'kjmol'),  units='kcalmol', digits=1, qualified=False):
-        self.nodes = []
+    def __init__(self, height, bgcolour=None, zero=energy(0, 'kjmol'), units='kjmol', digits=1, qualified=False):
+        self.nodes = {}
         self.edges = []
         self.bgcolour = bgcolour
         self.baseline = None
         self.zero = zero
         self.qualified = qualified
+        self.lastnode = None
         try:
             assert height > 0, 'height must be positive\n'
         except AssertionError as e:
@@ -77,20 +78,24 @@ class plot():
             self.bottombuf = 8.0
         self.hbuf = 2.0
 
-    def __add__(self, object):
-        {'edge':self.__add_edge, 'level':self.__add_node, 'baseline':self.__add_baseline}[object.__class__.__name__](object)
+    def add_level(self, name, energy=None, offset=1, colour=0x0):
+        if self.lastnode is not None:
+            location = self.lastnode.getLocation() + offset
+            self.edges.append(edge(self.lastnode.getName(), name))
+        else:
+            location = 1
+        if name not in self.nodes:
+            self.nodes[name] = level(energy, location, name, colour)
+        self.lastnode = self.nodes[name]
 
-    def __add_node(self, node):
-        self.nodes.append(node)
+    def new_branch(self):
+        self.lastnode = None
 
-    def __add_edge(self, edge):
-        self.edges.append(edge)
-
-    def __add_baseline(self, baseline):
-        self.baseline = baseline
+    def add_baseline(self, colour=0x0, mode='dashed', opacity=0.5):
+        self.baseline = baseline(colour, mode, opacity)
 
     def getNamedNode(self, name):
-        for node in self.nodes:
+        for node in self.nodes.values():
             if node.getName() == name:
                 return(node)
         sys.stderr.write('a referenced node {0} could not be found\n'.format(
@@ -100,23 +105,21 @@ class plot():
 
     def deriveBufferedEnergyRange(self, topbufsize, bottombufsize):
         energyRange = [
-                       min([ node.getEnergy() for node in self.nodes ]),
-                       max([ node.getEnergy() for node in self.nodes ])
+                       min([ node.getEnergy() for node in self.nodes.values() ]),
+                       max([ node.getEnergy() for node in self.nodes.values() ])
                       ]
         diff = energyRange[1]-energyRange[0]
         return([ energyRange[0]-(bottombufsize/100.0)*diff,
                  energyRange[1]+(topbufsize/100.0)*diff ])
 
     def render(self):
-        # Determine absolute path
-        path = os.path.dirname(__file__)
-        svgstring = ''
         # Write the preamble for the svg format
-        svgstring += appendTextFile('{}/dat/svgprefix.frag'.format(str(path)))
+        svgstring = '''<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n'''
         steps       = (max([ node.getLocation() for \
-                             node in self.nodes ]) -
+                             node in self.nodes.values() ]) -
                        min([ node.getLocation() for \
-                             node in self.nodes ]))+1
+                             node in self.nodes.values() ]))+1
         # Write dimensions of plot
         svgstring += ('<svg width="{0}cm" height="{1}cm" version="1.1" xmlns="http://www.w3.org/2000/svg">\n'.format(
                       0.25*self.height*steps, self.height
@@ -130,9 +133,9 @@ class plot():
         energyRange = self.deriveBufferedEnergyRange(self.topbuf, self.bottombuf)
         visualZero = 100.0-(((self.zero.energy-energyRange[0])/(energyRange[1]-energyRange[0]))*100.0)
         slices      = ((max([ node.getLocation() for \
-                              node in self.nodes ]) -
+                              node in self.nodes.values() ]) -
                         min([ node.getLocation() for \
-                              node in self.nodes ]))+1)*2-1
+                              node in self.nodes.values() ]))+1)*2-1
         sliceWidth  = (100.0-self.hbuf)/slices
         # Draw baseline if it has been defined
         if self.baseline != None:
@@ -146,7 +149,7 @@ class plot():
                           self.baseline.getOpacity()
                          ))
          # Iterate over nodes, setting visual sizes
-        for node in self.nodes:
+        for node in self.nodes.values():
             node.setVisualLeft(sliceWidth, self.hbuf)
             node.setVisualRight(sliceWidth, self.hbuf)
             node.setVisualHeight(energyRange)
@@ -165,7 +168,7 @@ class plot():
                           edge.getOpacity()
                          ))
         # Draw energy levels as well as their annotations
-        for node in self.nodes:
+        for node in self.nodes.values():
             svgstring += ('    <line x1="{0}%" x2="{1}%" y1="{2}%" y2="{2}%" stroke-linecap="round" stroke="#{3}" stroke-width="4"/>\n'.format(
                           node.getVisualLeft(),
                           node.getVisualRight(),
@@ -190,7 +193,7 @@ class plot():
                           unit_prettyprint[self.units]
                          ))
 
-        svgstring += appendTextFile('{0}/dat/svgpostfix.frag'.format(str(path)))
+        svgstring += '</svg>'
 #        sys.stderr.write('Normal termination\n')
 #        sys.stdout.write(svgstring)
         self.svgstring = svgstring
@@ -206,4 +209,3 @@ class plot():
             svg2png(self.svgstring, write_to=filename, scale=scale)
         else:
             print('Formato de imagen no soportado')
-
