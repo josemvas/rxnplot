@@ -24,22 +24,22 @@ class level:
    # energy        = None # energy(float/int, string)
    # name          = None # string
    # location      = 0    # int, >= 1
-   # colour        = 0x0  # int, 0:2^24-1
+   # color         = 'black' # string
    # visual_left   = None # float, internal
    # visual_right  = None # float, internal
    # visual_height = None # float, internal
 
-    def __init__(self, energy, location, name=None, colour=0x0):
+    def __init__(self, energy, location, name=None, color='black'):
         # Validation of energy is done inside energy class
         self.energy = energy
         # Validate location. Locations must be positive nonzero integers. Locations should start at 1 and be contiguous.
-        try:
-            assert type(location) == int, '{0} does not have an integer location.\n'.format(
-            self.describeLevel(name)
-            )
-        except AssertionError as e:
-            sys.stderr.write(e)
-            sys.exit(1)
+#        try:
+#            assert type(location) == int, '{0} does not have an integer location.\n'.format(
+#            self.describeLevel(name)
+#            )
+#        except AssertionError as e:
+#            sys.stderr.write(e)
+#            sys.exit(1)
         try:
             assert location > 0, 'supplied location ({0}) of {1} must be greater than 0.\n'.format(
             str(self.location),
@@ -50,44 +50,45 @@ class level:
             sys.exit(1)
         self.location = location
         # Locations don't require names but not supplying one makes it really hard to connect.
-        self.name     = name
-        # Ensure colour is a 24 bit hex colour.
-        if validateColour(colour):
-            self.colour = colour
+        self.name = name
+        self.color = color
+        # Ensure color is a valid SVG color.
+        if validateColour(color):
+            self.color = color
         else:
-            sys.stderr.write('{0} has invalid colour: {1}\n'.format(
+            sys.stderr.write('{0} has invalid color: {1}\n'.format(
             self.describeLevel(name),
-            colour
+            color
             ))
             sys.exit(1)
 
     def __repr__(self):
         # For debugging and rebugging
-        return('<level {0} at {1}, location: {2}, colour: {3}>\n'.format(
+        return('<level {0} at {1}, location: {2}, color: {3}>\n'.format(
         self.describeLevel(self.name),
         str(self.energy),
         str(self.location),
-        hex(self.colour))
+        hex(self.color))
         )
 
     def getEnergy(self):
         # Requests raw numeric energy in kJ/mol - used for positioning and unqualified annotation
         return(self.energy.energy)
 
-    def getQualifiedEnergy(self, zero, units, digits):
+    def getQualifiedEnergy(self, zero, units, decimals):
         # Gets pretty-printed energy - used for qualified annotation only
-        return('{{:.{}f}} {{}}'.format(digits).format((self.energy.energy - zero)/unit_conversion[units], unit_prettyprint[units]))
+        return('{{:.{}f}} {{}}'.format(decimals).format((self.energy.energy - zero)/unit_conversion[units], unit_prettyprint[units]))
 
-    def getUnqualifiedEnergy(self, zero, units, digits):
-        return('{{:.{}f}}'.format(digits).format((self.energy.energy - zero)/unit_conversion[units]))
+    def getUnqualifiedEnergy(self, zero, units, decimals):
+        return('{{:.{}f}}'.format(decimals).format((self.energy.energy - zero)/unit_conversion[units]))
 
     def getLocation(self):
         # The ordinal position of the level
         return(self.location)
 
     def getColour(self):
-        # The colour of the level
-        return(self.colour)
+        # The color of the level
+        return(self.color)
 
     def getName(self):
         # The external name of the level

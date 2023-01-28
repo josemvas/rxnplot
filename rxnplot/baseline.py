@@ -20,14 +20,14 @@
 from .rxnlvl_util import validateColour
 
 class baseline():
-    def __init__(self, colour=0x0, mode='dashed', opacity=0.5):
-        # Ensure colour is a 24 bit hex colour.
-        if validateColour(colour):
-            self.colour = colour
+    def __init__(self, color='black', mode='dashed', opacity=0.5):
+        # Ensure color is a valid SVG color.
+        if validateColour(color):
+            self.color = color
         else:
-            sys.stderr.write('{0} has invalid colour: {1}\n'.format(
+            sys.stderr.write('{0} has invalid color: {1}\n'.format(
             self.describeLevel(name),
-            colour
+            color
             ))
             sys.exit(1)
         try:
@@ -42,7 +42,7 @@ class baseline():
         self.opacity = opacity
         self.mode    = mode
     def getColour(self):
-        return(self.colour)
+        return(self.color)
     def getMode(self):
         if self.mode in ['normal',  'solid',    'continuous',      '']: return('')
         if self.mode in [  'dash', 'dashed', 'discontinuous','broken']: return('stroke-dasharray="5,5"')

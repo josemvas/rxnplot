@@ -19,9 +19,9 @@
 
 import sys
 
-def validateColour(colour):
+def validateColour(color):
     try:
-        assert type(colour) == int and int(colour) < (16**6)
+        assert type(color) == str
     except AssertionError as e:
         return(False)
     return(True)

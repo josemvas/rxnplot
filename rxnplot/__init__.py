@@ -27,19 +27,19 @@ from IPython.display import SVG, display
 from cairosvg import svg2png, svg2pdf
 
 class plot():
-   # height = 10
-   # bgcolour   = None
+   # height     = 10
+   # bgcolor    = None
    # vbuf       = 10.0
    # hbuf       = 10.0
    # nodes      = []
    # edges      = []
    # units      = 'kcalmol'
-   # digits     = 1
+   # decimals   = 1
 
-    def __init__(self, height, bgcolour=None, zero=energy(0, 'kjmol'), units='kjmol', digits=1, qualified=False):
+    def __init__(self, height, bgcolor=None, zero=energy(0., 'kjmol'), units='kjmol', decimals=1, qualified=False):
         self.nodes = {}
         self.edges = []
-        self.bgcolour = bgcolour
+        self.bgcolor = bgcolor
         self.baseline = None
         self.zero = zero
         self.qualified = qualified
@@ -50,13 +50,10 @@ class plot():
             sys.stderr.write(str(e))
             sys.exit(1)
         self.height = height
-        if validateColour(bgcolour):
-            self.bgcolour = bgcolour
+        if validateColour(bgcolor):
+            self.bgcolor = bgcolor
         else:
-            sys.stderr.write('INFO: Plot background colour is not set ' +
-                             'or invalid - plot background will be ' +
-                             'transparent\n'
-                            )
+            sys.stderr.write('INFO: Plot background will be transparent\n')
         try:
             assert units in unit_conversion.keys(), 'Unrecognised unit: {0}'.format(
             str(units)
@@ -66,33 +63,36 @@ class plot():
             sys.exit(1)
         self.units = units
         try:
-            assert digits >= 0, 'Digits must be a non negative integer number'
+            assert decimals >= 0, 'Digits must be a non negative integer number'
         except AssertionError:
             sys.stderr.write(str(e))
             sys.exit(1)
-        self.digits = int(digits)
+        self.decimals = decimals
         self.topbuf = 8.5
         if self.qualified:
-            self.bottombuf = 12.0
+            self.bottombuf = 12.
         else:
-            self.bottombuf = 8.0
-        self.hbuf = 2.0
+            self.bottombuf = 8.
+        self.hbuf = 2.
 
-    def add_level(self, name, energy=None, offset=1, colour=0x0):
-        if self.lastnode is not None:
+    def new_level(self, name, energy=None, offset=1, color='black'):
+        if self.lastnode is None:
+            location = 1.
+        else:
             location = self.lastnode.getLocation() + offset
             self.edges.append(edge(self.lastnode.getName(), name))
-        else:
-            location = 1
-        if name not in self.nodes:
-            self.nodes[name] = level(energy, location, name, colour)
+        self.nodes[name] = level(energy, location, name, color)
         self.lastnode = self.nodes[name]
 
-    def new_branch(self):
-        self.lastnode = None
+    def add_level(self, name):
+        self.edges.append(edge(self.lastnode.getName(), name))
+        self.lastnode = self.nodes[name]
 
-    def add_baseline(self, colour=0x0, mode='dashed', opacity=0.5):
-        self.baseline = baseline(colour, mode, opacity)
+    def new_branch(self, name):
+        self.lastnode = self.nodes[name]
+
+    def new_baseline(self, color='black', mode='dashed', opacity=0.5):
+        self.baseline = baseline(color, mode, opacity)
 
     def getNamedNode(self, name):
         for node in self.nodes.values():
@@ -125,13 +125,13 @@ class plot():
                       0.25*self.height*steps, self.height
                      ))
         # If background is defined, draw it
-        if self.bgcolour != None:
+        if self.bgcolor != None:
             svgstring += ('    <rect x="0%" y="0%" width="100%" height="100%" fill="#{0}"/>\n'.format(
-                          str(hex(self.bgcolour))[2:]
+                          str(hex(self.bgcolor))[2:]
                          ))
         # Calculate some geometry
         energyRange = self.deriveBufferedEnergyRange(self.topbuf, self.bottombuf)
-        visualZero = 100.0-(((self.zero.energy-energyRange[0])/(energyRange[1]-energyRange[0]))*100.0)
+        visualZero = 100.0 - (((self.zero.energy-energyRange[0])/(energyRange[1]-energyRange[0]))*100.0)
         slices      = ((max([ node.getLocation() for \
                               node in self.nodes.values() ]) -
                         min([ node.getLocation() for \
@@ -139,12 +139,11 @@ class plot():
         sliceWidth  = (100.0-self.hbuf)/slices
         # Draw baseline if it has been defined
         if self.baseline != None:
-            svgstring += ('    <line x1="{0}%" x2="{1}%" y1="{2}%" y2="{2}%" stroke-linecap="round" stroke="#{3}" {4} stroke-opacity="{5}" stroke-width="1"/>\n'.format(
+            svgstring += ('    <line x1="{0}%" x2="{1}%" y1="{2}%" y2="{2}%" stroke-linecap="round" stroke="{3}" {4} stroke-opacity="{5}" stroke-width="1"/>\n'.format(
                           self.hbuf/2,
                           100 - self.hbuf/2,
                           visualZero,
-                          # Courtesy of Tim Pietzcker
-                          "{0:#0{1}x}".format(self.baseline.getColour(),8)[2:],
+                          self.baseline.getColour(),
                           self.baseline.getMode(),
                           self.baseline.getOpacity()
                          ))
@@ -158,25 +157,24 @@ class plot():
         for edge in self.edges:
             entry_node = self.getNamedNode(edge.getStart())
             exit_node  = self.getNamedNode(edge.getEnd())
-            svgstring += ('    <line x1="{0}%" x2="{1}%" y1="{2}%" y2="{3}%" stroke="#{4}" {5} stroke-width="1" stroke-opacity="{6}" />\n'.format(
+            svgstring += ('    <line x1="{0}%" x2="{1}%" y1="{2}%" y2="{3}%" stroke="{4}" {5} stroke-width="0.5pt" stroke-opacity="{6}" />\n'.format(
                           entry_node.getVisualRight(),
                           exit_node.getVisualLeft(),
                           entry_node.getVisualHeight(),
                           exit_node.getVisualHeight(),
-                          "{0:#0{1}x}".format(edge.getColour(),8)[2:],
+                          edge.getColour(),
                           edge.getMode(),
                           edge.getOpacity()
                          ))
         # Draw energy levels as well as their annotations
         for node in self.nodes.values():
-            svgstring += ('    <line x1="{0}%" x2="{1}%" y1="{2}%" y2="{2}%" stroke-linecap="round" stroke="#{3}" stroke-width="4"/>\n'.format(
+            svgstring += ('    <line x1="{0}%" x2="{1}%" y1="{2}%" y2="{2}%" stroke-linecap="round" stroke="{3}" stroke-width="4"/>\n'.format(
                           node.getVisualLeft(),
                           node.getVisualRight(),
                           node.getVisualHeight(),
-                          # Courtesy of Tim Pietzcker
-                          "{0:#0{1}x}".format(node.getColour(),8)[2:]
+                          node.getColour()
                          ))
-            svgstring += ('    <text x="{0}%" y="{1}%" dy="-0.9ex" font-family="sans-serif" text-anchor="middle" font-weight="bold" fill="#000000">{2}</text>\n'.format(
+            svgstring += ('    <text x="{0}%" y="{1}%" dy="-0.9ex" font-family="sans-serif" text-anchor="middle" font-size="11pt" font-weight="bold" fill="#000000">{2}</text>\n'.format(
                           node.getVisualLeft()+sliceWidth/2,
                           node.getVisualHeight(),
                           node.getName()
@@ -184,7 +182,7 @@ class plot():
             svgstring += ('    <text x="{0}%" y="{1}%" dy="2.6ex" font-family="sans-serif" text-anchor="middle" font-size="10pt" fill="#000000">{2}</text>\n'.format(
                           node.getVisualLeft()+sliceWidth/2,
                           node.getVisualHeight(),
-                          node.getUnqualifiedEnergy(self.zero.energy, self.units, self.digits)
+                          node.getUnqualifiedEnergy(self.zero.energy, self.units, self.decimals)
                          ))
             if self.qualified:
                 svgstring += ('    <text x="{0}%" y="{1}%" dy="5.3ex" font-family="sans-serif" text-anchor="middle" font-size="8pt" fill="#000000">{2}</text>\n'.format(
@@ -208,4 +206,4 @@ class plot():
         elif filename.lower().endswith('.png'):
             svg2png(self.svgstring, write_to=filename, scale=scale)
         else:
-            print('Formato de imagen no soportado')
+            print('ERROR: Unsupported file format')

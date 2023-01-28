@@ -53,4 +53,3 @@ class energy:
             unit_prettyprint[units]
             ))
             sys.exit(1)
-

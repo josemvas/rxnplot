@@ -22,11 +22,11 @@ from .rxnlvl_util import validateColour
 class edge:
     # start   = None     # string
     # end     = None     # string
-    # colour  = 0x0      # int, 0:2^24-1
+    # color   = 'black'  # string
     # opacity = 1.0      # float, 0.0:1.0
     # mode    = 'normal' # string
     
-    def __init__(self, start, end, colour=0x0, opacity=1.0, mode='normal'):
+    def __init__(self, start, end, color='black', opacity=1.0, mode='normal'):
         try:
             assert start != end, 'Degenerate edge detected in input: {0} to {1}\n'.format(start, end)
         except AssertionError as e:
@@ -34,16 +34,15 @@ class edge:
             sys.exit(1)
         self.start   = start
         self.end     = end
-        try:
-            assert type(colour) == int and int(colour) < (16**6), 'edge between {0} and {1} has invalid colour: {2}\n'.format(
-            self.start,
-            self.end,
-            colour
-            )
-        except AssertionError as e:
-            sys.stderr.write(str(e))
+        # Ensure color is a valid SVG color.
+        if validateColour(color):
+            self.color = color
+        else:
+            sys.stderr.write('{0} has invalid color: {1}\n'.format(
+            self.describeLevel(name),
+            color
+            ))
             sys.exit(1)
-        self.colour  = colour
         # Make sure edge opacity is a number between 0.0 and 1.0
         try:
             assert opacity >= 0.0 and opacity <= 1.0, 'Invalid opacity on edge {0} to {1}: {2}\n'.format(
@@ -58,10 +57,10 @@ class edge:
         self.mode    = mode
 
     def __repr__(self):
-        return('<edge from {0} to {1}, colour: {2}, opacity: {3}, mode: {4}>'.format(
+        return('<edge from {0} to {1}, color: {2}, opacity: {3}, mode: {4}>'.format(
         self.start,
         self.end,
-        hex(self.colour),
+        hex(self.color),
         str('{0}%'.format(self.opacity*100)),
         self.mode))
 
@@ -72,7 +71,7 @@ class edge:
         return(self.end)
 
     def getColour(self):
-        return(self.colour)
+        return(self.color)
 
     def getMode(self):
         if self.mode in ['normal',  'solid',    'continuous',      '']: return('')
@@ -80,4 +79,3 @@ class edge:
 
     def getOpacity(self):
         return(self.opacity)
-

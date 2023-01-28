@@ -1,11 +1,11 @@
 rxnplot
 ======
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/qcuaeh/rxnplot.git/HEAD?labpath=tests)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/qcuaeh/rxnplot.git/HEAD?labpath=examples)
 
 **rxnplot** es un paquete de Python 3 para dibujar diagramas de niveles de energía de reacciones químicas. Está basado en el paquete
-[rxnlvl](https://github.com/eutactic/rxnlvl) pero tiene soporte para documentos de [Jupyter](https://jupyter.org) y opciones adicionales para ajustar las unidades de energía.
+[rxnlvl](https://github.com/eutactic/rxnlvl) pero tiene una sintaxis diferente y es compatible con documentos de Jupyter.
 
-![graphic](graphic.png)
+![graphic](abstract.png)
 
 Instale rxnplot
 ------
@@ -14,10 +14,7 @@ Puede instalar **rxnplot** en su computadora con pip:
 
     pip install rxnplot
 
-Pruebe rxnplot en Binder
-------
-
-También puede [abrir rxnplot en Binder](https://mybinder.org/v2/gh/qcuaeh/rxnplot.git/HEAD?labpath=tests) sin necesidad de instalar nada en su computadora.
+o puede [abrir rxnplot en Binder](https://mybinder.org/v2/gh/qcuaeh/rxnplot.git/HEAD?labpath=examples) sin necesidad de instalar nada.
 
 Construya un diagrama paso a paso
 ------
@@ -26,66 +23,71 @@ Para crear diagramas tendrá que escribir código de Python, pero incluso si nun
 
 ### Primero importe el módulo
 
-    from rxnplot import *
+    from rxnplot import plot, energy
 
-### y cree un objeto de gráfico
+### luego cree un objeto de gráfico
 
-    p = plot(10.0, zero=energy(0.0, 'kjmol'), units='kcalmol', digits=1True)
+    p = plot(height=10.0, zero=energy(0.0, 'kjmol'), units='kcalmol', decimals=1, qualified=True)
     
-El objeto `plot` representa un diagrama inicialmente en blanco y requiere como argumentos:
+El objeto *plot* representa un diagrama inicialmente en blanco y requiere como argumentos:
 
-- `size` - El tamaño vertical del gráfico en cm.
-- `bgcolour` - El color de fondo de la imagen, como un entero hexadecimal de 24 bits o `None`. Si es `None`, el fondo será transparente.
-- `zero` - Un objeto `energy` que representa el cero de las energías relativas. Requiere dos argumentos: la energía como un número de punto flotante y las unidades que pueden ser `'kjmol'`, `'eh'` (Hartrees), `'ev'` (electronvoltios), `'kcalmol'` (kilocalorías por mol termoquímicas) o `'wavenumber'`.
-- `units` - Las unidades de energía del diagrama, que pueden ser `'kjmol'`, `'eh'` (Hartrees), `'ev'` (electronvoltios), `'kcalmol'` (kilocalorías por mol termoquímicas) o `'wavenumber'`.
-- `digits` - Los dígitos después del punto decimal que se usarán para mostrar las energías en el diagrama.
-- `qualified` - Si es `True`, se mostrarán las unidades de energía en el diagrama, de lo contrario sólo se mostrarán los valores numéricos.
+- *height* - el tamaño vertical del gráfico en cm.
+- *bgcolor* - el nombre del color de fondo de la imagen o `None`. Si es `None`, el fondo será transparente.
+- *zero* - un objeto *energy* que representa el cero de las energías relativas.
+- *units* - las unidades de energía del diagrama.
+- *decimals* - el número de decimales que se usarán para mostrar las energías en el diagrama.
+- *qualified* - si es `True`, se mostrarán las unidades de energía en el diagrama, de lo contrario sólo se mostrarán los valores numéricos.
+
+El objeto *energy* requiere dos argumentos: la energía como un número de punto flotante y las unidades.
+
+Las unidades de energía pueden ser `'kjmol'` (kilojulios por mol), `'eh'` (hartrees), `'ev'` (electronvoltios), `'kcalmol'` (kilocalorías por mol) o
+`'wavenumber'` (números de onda).
+
+Los colores deben ser [nombres de colores SVG](https://upload.wikimedia.org/wikipedia/commons/2/2b/SVG_Recognized_color_keyword_names.svg). 
 
 Ahora puede empezar a agregar elementos al gráfico.
 
-### Incluya una línea base (esto es opcional)
+### puede incluir una línea base (esto es opcional)
 
-    p + baseline(colour=0x0, mode='dashed', opacity=0.1)
+    p.new_baseline(color='black', mode='dashed', opacity=0.1)
 
-El objeto `baseline` es una línea que representa el cero de energía y requiere como argumentos:
+El método *new_baseline* crea una línea que representa el cero de energía y requiere como argumentos:
 
-- `colour` - Un entero hexadecimal de 24 bits quw representa el color de la arista.
-- `mode` - Controla la apariencia de la arista, puede ser `'normal'` o `'dashed'`.
-- `opacity` - Un flotante entre 0.0 y 1.0 que representan la opacidad de la arista.
+- *color* - el color de la línea base.
+- *mode* - controla la apariencia de la línea base, puede ser `'normal'` o `'dashed'`.
+- *opacity* - un flotante entre 0.0 y 1.0 que representan la opacidad de la línea base.
 
-### Defina los niveles de energía
+### finalmente defina los niveles de energía
 
-    p + level(energy(0, 'kjmol'),  1,   '1',  0x0)
-    p + level(energy(0, 'kjmol'),  2, 'TS1',  0x0)
-    p + level(energy(0, 'kjmol'),  3,   '2',  0x0)
+    p.new_level('1', energy(0.0, 'kjmol'))
+    p.new_level('TS1', energy(0.0, 'kjmol'))
+    p.new_level('2', energy(0.0, 'kjmol'))
+    p.new_branch('1')
+    p.new_level('TS2', energy(0.0, 'kjmol'), offset=0.5, color=red)
+    p.add_level('2')
 
-Cada objeto `level` representa un nivel de energía y requiere como argumentos:
+El método *new_level* agrega un nuevo nuevo nivel de energía y requiere como argumentos:
 
-- `energy` - Un objeto que representa la energía relativa del nivel. El objeto `energy` tiene dos argumentos: la energía como un número de punto flotante y las unidades, que pueden ser `'kjmol'`, `'eh'` (Hartrees), `'ev'` (electronvoltios), `'kcalmol'` (kilocalorías por mol termoquímicas) o `'wavenumber'`.
-- `location` - La ubicación ordinal del nivel en el diagrama, debe ser un entero positivo diferente de cero. Diferentes niveles pueden compartir la misma ubicación.
-- `name` - El nombre del nivel en el diagrama, que debe ser único.
-- `colour` - Un entero hexadecimal de 24 bits quw representa el color del nivel.
+- *name* - el nombre del nivel, que debe ser único.
+- *energy* - un objeto *energy* que representa la energía relativa del nivel.
+- *offset* - el desplazamiento horizontal del nivel respecto al nivel anterior (el valor por defecto es 1.0).
+- *color* - el color del nivel (el valor por defecto es `'black'`).
 
-### Conecte los niveles de energía
+El método *add_level* agrega un nuevo nivel de energía existente y requiere como argumentos:
 
-    p + edge(  '1', 'TS1',  0x0,  0.5,  'normal')
-    p + edge('TS1',   '2',  0x0,  0.5,  'normal')
+- *name* - el nombre del nivel.
 
-Cada objeto `edge` representa una conexión entre dos niveles de energía y requiere como argumentos:
+El método `new_branch` inicia una nueva rama del perfil y requiere como argumentos:
 
-- `start` - El `nombre` del nivel del que se origina la arista.
-- `end` - El `nombre` del nivel en el que termina la arista, tiene que ser diferente de `start`.
-- `colour` - Un entero hexadecimal de 24 bits representando el color de la arista.
-- `opacity` - Un flotante entre 0.0 y 1.0 representando la opacidad de la arista.
-- `mode` - Controla la apariencia de la arista, puede ser `'normal'` o `'dashed'`.
+- *name* - el nombre del nivel.
 
-### Finalmente visualice el diagrama
+### y visualice el diagrama
 
     p.render()
 
 Mostrará el diagrama en una celda del documento.
 
-### o guarde el diagrama en un archivo
+### opcionalmente guarde el diagrama en un archivo
 
     p.write('diagrama.png')
 
