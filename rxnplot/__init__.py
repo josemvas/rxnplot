@@ -76,6 +76,9 @@ class plot():
         self.hbuf = 2.
 
     def new_level(self, name, energy=None, offset=1, color='black'):
+        if name in self.nodes:
+            sys.stderr.write("ERROR: Node '{0}' already exists\n".format(name))
+            sys.exit()
         if self.lastnode is None:
             location = 1.
         else:

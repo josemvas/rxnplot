@@ -1,38 +1,41 @@
 rxnplot
 ======
+
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/qcuaeh/rxnplot.git/HEAD?labpath=examples)
 
-**rxnplot** es un paquete de Python 3 para dibujar diagramas de niveles de energía de reacciones químicas. Está basado en el paquete
+**rxnplot** es un paquete de Python 3 para dibujar diagramas de niveles de energía de reacciones químicas. Está basado en
 [rxnlvl](https://github.com/eutactic/rxnlvl) pero tiene una sintaxis diferente y es compatible con documentos de Jupyter.
 
 ![graphic](abstract.png)
 
-Instale rxnplot
-------
 
-Puede instalar **rxnplot** en su computadora con pip:
+Instala rxnplot
+---------------
+
+Puedes instalar **rxnplot** en tu computadora con pip:
 
     pip install rxnplot
 
-o puede [abrir rxnplot en Binder](https://mybinder.org/v2/gh/qcuaeh/rxnplot.git/HEAD?labpath=examples) sin necesidad de instalar nada.
+o puedes [abrir rxnplot en Binder](https://mybinder.org/v2/gh/qcuaeh/rxnplot.git/HEAD?labpath=examples) sin necesidad de instalar nada.
 
-Construya un diagrama paso a paso
-------
 
-Para crear diagramas tendrá que escribir código de Python, pero incluso si nunca lo ha hecho puede aprender a construir diagramas rápidamente.
+Construye un diagrama paso a paso
+--------------------------------
 
-### Primero importe el módulo
+Para crear un diagrama tendrás que usar Python, pero incluso si nunca lo has usado puedes aprender a construir diagramas rápidamente.
+
+#### Primero importa el módulo
 
     from rxnplot import plot, energy
 
-### luego cree un objeto de gráfico
+#### luego crea un objeto de gráfico
 
     p = plot(height=10.0, zero=energy(0.0, 'kjmol'), units='kcalmol', decimals=1, qualified=True)
     
 El objeto *plot* representa un diagrama inicialmente en blanco y requiere como argumentos:
 
 - *height* - el tamaño vertical del gráfico en cm.
-- *bgcolor* - el nombre del color de fondo de la imagen o `None`. Si es `None`, el fondo será transparente.
+- *bgcolor* - el color de fondo de la imagen o `None`. Si es `None`, el fondo será transparente.
 - *zero* - un objeto *energy* que representa el cero de las energías relativas.
 - *units* - las unidades de energía del diagrama.
 - *decimals* - el número de decimales que se usarán para mostrar las energías en el diagrama.
@@ -45,9 +48,9 @@ Las unidades de energía pueden ser `'kjmol'` (kilojulios por mol), `'eh'` (hart
 
 Los colores deben ser [nombres de colores SVG](https://upload.wikimedia.org/wikipedia/commons/2/2b/SVG_Recognized_color_keyword_names.svg). 
 
-Ahora puede empezar a agregar elementos al gráfico.
+Ahora puedes empezar a agregar elementos al gráfico.
 
-### puede incluir una línea base (esto es opcional)
+#### puedes incluir una línea base (esto es opcional)
 
     p.new_baseline(color='black', mode='dashed', opacity=0.1)
 
@@ -57,13 +60,13 @@ El método *new_baseline* crea una línea que representa el cero de energía y r
 - *mode* - controla la apariencia de la línea base, puede ser `'normal'` o `'dashed'`.
 - *opacity* - un flotante entre 0.0 y 1.0 que representan la opacidad de la línea base.
 
-### finalmente defina los niveles de energía
+#### finalmente define los niveles de energía
 
-    p.new_level('1', energy(0.0, 'kjmol'))
-    p.new_level('TS1', energy(0.0, 'kjmol'))
-    p.new_level('2', energy(0.0, 'kjmol'))
+    p.new_level('1', energy(0.0, 'kcalmol'))
+    p.new_level('TS1', energy(8.1, 'kcalmol'), color='green')
+    p.new_level('2', energy(-6.4, 'kcalmol'))
     p.new_branch('1')
-    p.new_level('TS2', energy(0.0, 'kjmol'), offset=0.5, color=red)
+    p.new_level('TS2', energy(12.6, 'kcalmol'), color='red')
     p.add_level('2')
 
 El método *new_level* agrega un nuevo nuevo nivel de energía y requiere como argumentos:
@@ -81,18 +84,18 @@ El método `new_branch` inicia una nueva rama del perfil y requiere como argumen
 
 - *name* - el nombre del nivel.
 
-### y visualice el diagrama
+#### y visualiza el diagrama
 
     p.render()
 
-Mostrará el diagrama en una celda del documento.
-
-### opcionalmente guarde el diagrama en un archivo
+#### o guarda el diagrama en un archivo
 
     p.write('diagrama.png')
 
-guardará el diagrama como PNG. Puede cambiar el tamaño de la imagen con la opción `scale`. Por ejemplo 
+El método write acepta la opción *scale*:
 
     p.write('diagrama.png', scale=2)
 
-guardará el diagrama con el doble de la resolución por defecto. También puede guardar el diagrama como archivo PDF o SVG.
+y también crea archivos PDF:
+
+    p.write('diagrama.pdf')
