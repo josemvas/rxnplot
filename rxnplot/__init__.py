@@ -77,14 +77,13 @@ class plot():
 
     def new_level(self, name, energy=None, offset=1, color='black'):
         if name in self.nodes:
-            sys.stderr.write("ERROR: Node '{0}' already exists\n".format(name))
-            sys.exit()
-        if self.lastnode is None:
-            location = 1.
+            sys.stderr.write('INFO: Node "{0}" already exists\n'.format(name))
         else:
-            location = self.lastnode.getLocation() + offset
-            self.edges.append(edge(self.lastnode.getName(), name))
-        self.nodes[name] = level(energy, location, name, color)
+            if self.lastnode is None:
+                self.nodes[name] = level(energy, 1, name, color)
+            else:
+                self.nodes[name] = level(energy, self.lastnode.getLocation() + offset, name, color)
+                self.edges.append(edge(self.lastnode.getName(), name))
         self.lastnode = self.nodes[name]
 
     def add_level(self, name):
@@ -93,6 +92,9 @@ class plot():
 
     def new_branch(self, name):
         self.lastnode = self.nodes[name]
+
+    def new_profile(self):
+        self.lastnode = None
 
     def new_baseline(self, color='black', mode='dashed', opacity=0.5):
         self.baseline = baseline(color, mode, opacity)
