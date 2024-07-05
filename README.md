@@ -3,8 +3,7 @@ rxnplot
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/qcuaeh/rxnplot.git/HEAD?labpath=examples)
 
-**rxnplot** es un paquete de Python 3 para dibujar diagramas de niveles de energía de reacciones químicas. Está basado en
-[rxnlvl](https://github.com/eutactic/rxnlvl) pero tiene una sintaxis diferente y es compatible con documentos de Jupyter.
+**rxnplot** es un paquete de Python 3 para dibujar diagramas de niveles de energía de reacciones químicas compatible con documentos de Jupyter.
 
 ![graphic](abstract.png)
 
