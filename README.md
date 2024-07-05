@@ -1,7 +1,7 @@
 rxnplot
 ======
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/qcuaeh/rxnplot.git/HEAD?labpath=examples)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/josemvas/rxnplot.git/HEAD?filepath=examples)
 
 **rxnplot** es un paquete de Python 3 para dibujar diagramas de niveles de energía de reacciones químicas compatible con documentos de Jupyter.
 
@@ -15,7 +15,7 @@ Puedes instalar **rxnplot** en tu computadora con pip:
 
     pip install rxnplot
 
-o puedes [abrir rxnplot en Binder](https://mybinder.org/v2/gh/qcuaeh/rxnplot.git/HEAD?labpath=examples) sin necesidad de instalar nada.
+o puedes [usar rxnplot en Binder](https://mybinder.org/v2/gh/josemvas/rxnplot.git/HEAD?filepath=examples) sin necesidad de instalar nada.
 
 
 Construye un diagrama paso a paso
